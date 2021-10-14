@@ -32,14 +32,14 @@ Visit http://localhost:3000 and login with email `oliver@example.com` and passwo
 
 Follow the instructions mentioned [here](https://github.com/bigbinary/wheel/blob/master/docs/using_docker.md) to use docker for development.
 
-## Replace Wheel with your project name
+## Replace NeetoUIChallenge with your project name
 
-Let's say that the project name is `Pump`. Execute the command below to
-replace all occurrences of `Wheel` with `Pump`.
+Let's say that the project name is `NeetoUIChallenge`. Execute the command below to
+replace all occurrences of `NeetoUIChallenge` with `NeetoUIChallenge`.
 
 ```bash
-perl -pi -w -e 's/Wheel/Pump/g;' $(git ls-files)
-perl -pi -w -e 's/wheel/Pump/g;' $(git ls-files)
+perl -pi -w -e 's/NeetoUIChallenge/NeetoUIChallenge/g;' $(git ls-files)
+perl -pi -w -e 's/wheel/NeetoUIChallenge/g;' $(git ls-files)
 ```
 
 ## Features
