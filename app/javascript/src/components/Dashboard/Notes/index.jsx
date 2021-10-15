@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { Button, PageLoader } from "@bigbinary/neetoui/v2";
+import { Search, Settings, Plus } from "@bigbinary/neeto-icons";
+import { Button, PageLoader, Typography } from "@bigbinary/neetoui/v2";
+import { MenuBar } from "@bigbinary/neetoui/v2/layouts";
 import EmptyNotesListImage from "images/EmptyNotesList";
 import { Header, SubHeader } from "neetoui/layouts";
 
@@ -67,36 +69,77 @@ const Notes = () => {
         }
         toggleMenu={() => {}}
       />
+      <div className="flex flex-row">
+        <MenuBar showMenu="true" title="Contacts">
+          <MenuBar.Block label="All" count={200} active />
+          <MenuBar.Block label="Users" count={80} />
+          <MenuBar.Block label="Leads" count={60} />
+          <MenuBar.Block label="Visitors" count={60} />
 
-      {notes.length ? (
-        <>
-          {/* <SubHeader
-            searchProps={{
-              value: searchTerm,
-              onChange: e => setSearchTerm(e.target.value),
-              clear: () => setSearchTerm("")
-            }}
-            deleteButtonProps={{
-              onClick: () => setShowDeleteAlert(true),
-              disabled: !selectedNoteIds.length
-            }}
-          /> */}
-          <NoteTable
-            selectedNoteIds={selectedNoteIds}
-            setSelectedNoteIds={setSelectedNoteIds}
-            notes={notes}
-            setShowDeleteAlert={setShowDeleteAlert}
+          <MenuBar.SubTitle
+            iconProps={[
+              {
+                icon: () => <Search size={20} />
+              }
+            ]}
+          >
+            <Typography
+              component="h4"
+              style="h5"
+              textTransform="uppercase"
+              weight="bold"
+            >
+              Segments
+            </Typography>
+          </MenuBar.SubTitle>
+          <MenuBar.Block label="Europe" count={80} />
+          <MenuBar.Block label="Middle-East" count={60} />
+          <MenuBar.Block label="Asia" count={60} />
+          <MenuBar.SubTitle
+            iconProps={[
+              {
+                icon: () => <Settings size={20} />
+              },
+              {
+                icon: () => <Plus size={20} />
+              },
+              {
+                icon: () => <Search size={20} />
+              }
+            ]}
+          >
+            <Typography
+              component="h4"
+              style="h5"
+              textTransform="uppercase"
+              weight="bold"
+            >
+              Tags
+            </Typography>
+          </MenuBar.SubTitle>
+          <MenuBar.Block label="Sales" count={80} />
+          <MenuBar.Block label="Finance" count={60} />
+          <MenuBar.Block label="User Experience" count={60} />
+        </MenuBar>
+        {notes.length ? (
+          <>
+            <NoteTable
+              selectedNoteIds={selectedNoteIds}
+              setSelectedNoteIds={setSelectedNoteIds}
+              notes={notes}
+              setShowDeleteAlert={setShowDeleteAlert}
+            />
+          </>
+        ) : (
+          <EmptyState
+            image={EmptyNotesListImage}
+            title="Looks like you don't have any notes!"
+            subtitle="Add your notes to send customized emails to them."
+            primaryAction={() => setShowNewNotePane(true)}
+            primaryActionLabel="Add New Note"
           />
-        </>
-      ) : (
-        <EmptyState
-          image={EmptyNotesListImage}
-          title="Looks like you don't have any notes!"
-          subtitle="Add your notes to send customized emails to them."
-          primaryAction={() => setShowNewNotePane(true)}
-          primaryActionLabel="Add New Note"
-        />
-      )}
+        )}
+      </div>
       <NewNotePane
         showPane={showNewNotePane}
         setShowPane={setShowNewNotePane}

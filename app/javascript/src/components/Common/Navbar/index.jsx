@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Clock } from "@bigbinary/neeto-icons";
+import { Dashboard, UserCircle, Settings } from "@bigbinary/neeto-icons";
 import { Sidebar } from "@bigbinary/neetoui/v2/layouts";
 import { Toastr } from "neetoui";
 import { withRouter } from "react-router-dom";
@@ -35,25 +35,21 @@ const NavBar = () => {
         <Sidebar
           navLinks={[
             {
-              icon: Clock,
+              icon: Dashboard,
               label: "Notes",
               to: "/notes"
             },
             {
-              icon: Clock,
+              icon: UserCircle,
               label: "Contacts",
-              to: "/form-elements"
+              to: "/contacts"
             },
             {
-              icon: Clock,
+              icon: Settings,
               label: "Settings",
-              to: "/misc"
+              to: "/settings"
             }
           ]}
-          organizationInfo={{
-            name: "neetoUI",
-            subdomain: "neetoui.netlify.app"
-          }}
           profileInfo={{
             dropdownProps: [
               {
