@@ -102,7 +102,7 @@ function NoteRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
             }}
             size="small"
             user={{
-              name: user.first_name + " " + user.last_name
+              name: user?.first_name + " " + user?.last_name
             }}
           />
         </div>

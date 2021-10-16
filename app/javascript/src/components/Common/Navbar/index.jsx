@@ -63,8 +63,8 @@ const NavBar = () => {
               onClick: handleLogout
             }
           ],
-          email: user.email,
-          name: user.first_name + " " + user.last_name
+          email: user?.email,
+          name: user?.first_name + " " + user?.last_name
         }}
       />
     </div>
