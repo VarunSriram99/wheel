@@ -20,6 +20,7 @@ const Notes = () => {
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
   const [notes, setNotes] = useState([]);
+
   const [searchString, setSearchString] = useState(
     "Search Name, Email, Phone Number, Ect."
   );
@@ -55,6 +56,7 @@ const Notes = () => {
           <div className="flex flex-row justify-center">
             <SubHeader
               className="w-80"
+
               searchProps={{
                 value: searchString,
                 onChange: e => setSearchString(e.target.value),
