@@ -45,7 +45,7 @@ const Notes = () => {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full">
       <Header
         title="All Notes"
         menuBarToggle={() => {
