@@ -7,54 +7,72 @@ import { Header } from "@bigbinary/neetoui/v2/layouts";
 import EmptyNotesListImage from "images/EmptyNotesList";
 import { SubHeader } from "neetoui/layouts";
 
-import notesApi from "apis/notes";
 import EmptyState from "components/Common/EmptyState";
 
+import ContactTable from "./ContactTable";
 import DeleteAlert from "./DeleteAlert";
-import NewNotePane from "./NewNotePane";
-import NoteTable from "./NoteTable";
+import NewContactPane from "./NewContactPane";
 
-const Notes = () => {
+const Contacts = () => {
   const [loading, setLoading] = useState(true);
-  const [showNewNotePane, setShowNewNotePane] = useState(false);
+  const [showNewContactPane, setShowNewContactPane] = useState(false);
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
   const [notes, setNotes] = useState([]);
-  const [searchString, setSearchString] = useState(
-    "Search Name, Email, Phone Number, Ect."
-  );
+  const [searchString, setSearchString] = useState("");
 
   useEffect(() => {
-    fetchNotes();
-  }, []);
-
-  const fetchNotes = async () => {
-    try {
-      setLoading(true);
-      const response = await notesApi.fetch();
-      setNotes(response.data.notes);
-    } catch (error) {
-      logger.error(error);
-    } finally {
-      setLoading(false);
+    if (!localStorage.getItem("contacts")) {
+      setNotes([
+        {
+          firstName: "Ronald",
+          lastName: "Richards",
+          email: "albert@borer.com",
+          role: "Owner",
+          createdAt: new Date()
+        },
+        {
+          firstName: "Jacob",
+          lastName: "Jones",
+          email: "albert@borer.com",
+          role: "Owner",
+          createdAt: new Date()
+        },
+        {
+          firstName: "Ronald",
+          lastName: "Richards",
+          email: "albert@borer.com",
+          role: "Owner",
+          createdAt: new Date()
+        },
+        {
+          firstName: "Jacob",
+          lastName: "Jones",
+          email: "albert@borer.com",
+          role: "Owner",
+          createdAt: new Date()
+        }
+      ]);
+      localStorage.setItem("contacts", notes);
+    } else {
+      setNotes(JSON.parse(localStorage.getItem("contacts")));
     }
-  };
+    setLoading(false);
+  }, []);
 
   if (loading) {
     return <PageLoader />;
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full">
       <Header
-        title="All Notes"
-        menuBarToggle={() => {
-          alert("Clicked");
-        }}
+        title="All Contacts"
+        menuBarToggle={() => {}}
         actionBlock={
-          <div className="flex flex-row justify-center">
+          <div className="flex flex-row justify-between ml-80">
             <SubHeader
-              className="w-80"
+              className="w-80 mx-5"
               searchProps={{
                 value: searchString,
                 onChange: e => setSearchString(e.target.value),
@@ -64,8 +82,8 @@ const Notes = () => {
 
             <br />
             <Button
-              onClick={() => setShowNewNotePane(true)}
-              label="Add Note"
+              onClick={() => setShowNewContactPane(true)}
+              label="Add Contact"
               icon="ri-add-line"
               style="primary"
               size="large"
@@ -76,11 +94,11 @@ const Notes = () => {
         toggleMenu={() => {}}
       />
       <div className="flex flex-row">
-        <MenuBar showMenu="true" title="Notes">
-          <MenuBar.Block label="All" count={200} active />
-          <MenuBar.Block label="Users" count={80} />
-          <MenuBar.Block label="Leads" count={60} />
-          <MenuBar.Block label="Visitors" count={60} />
+        <MenuBar showMenu="true" title="Contacts">
+          <MenuBar.Block label="All" count={0} active />
+          <MenuBar.Block label="Archived" count={0} />
+          <MenuBar.Block label="Completed" count={0} />
+          <MenuBar.Block label="Phase 2" count={0} />
 
           <MenuBar.SubTitle
             iconProps={[
@@ -98,9 +116,6 @@ const Notes = () => {
               Segments
             </Typography>
           </MenuBar.SubTitle>
-          <MenuBar.Block label="Europe" count={80} />
-          <MenuBar.Block label="Middle-East" count={60} />
-          <MenuBar.Block label="Asia" count={60} />
           <MenuBar.SubTitle
             iconProps={[
               {
@@ -123,13 +138,10 @@ const Notes = () => {
               Tags
             </Typography>
           </MenuBar.SubTitle>
-          <MenuBar.Block label="Sales" count={80} />
-          <MenuBar.Block label="Finance" count={60} />
-          <MenuBar.Block label="User Experience" count={60} />
         </MenuBar>
         {notes.length ? (
           <>
-            <NoteTable
+            <ContactTable
               selectedNoteIds={selectedNoteIds}
               setSelectedNoteIds={setSelectedNoteIds}
               notes={notes}
@@ -141,25 +153,27 @@ const Notes = () => {
             image={EmptyNotesListImage}
             title="Looks like you don't have any notes!"
             subtitle="Add your notes to send customized emails to them."
-            primaryAction={() => setShowNewNotePane(true)}
+            primaryAction={() => setShowNewContactPane(true)}
             primaryActionLabel="Add New Note"
           />
         )}
       </div>
-      <NewNotePane
-        showPane={showNewNotePane}
-        setShowPane={setShowNewNotePane}
-        fetchNotes={fetchNotes}
+      <NewContactPane
+        showPane={showNewContactPane}
+        setShowPane={setShowNewContactPane}
+        setNotes={setNotes}
+        notes={notes}
       />
       {showDeleteAlert && (
         <DeleteAlert
           selectedNoteIds={selectedNoteIds}
+          notes={notes}
+          setNotes={setNotes}
           onClose={() => setShowDeleteAlert(false)}
-          refetch={fetchNotes}
         />
       )}
     </div>
   );
 };
 
-export default Notes;
+export default Contacts;

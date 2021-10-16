@@ -1034,21 +1034,21 @@
     "@babel/helper-validator-identifier" "^7.14.9"
     to-fast-properties "^2.0.0"
 
-"@bigbinary/neeto-icons@^1.7.0":
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/@bigbinary/neeto-icons/-/neeto-icons-1.7.3.tgz#0c9a6025fae15957e16787e9fd9c44b332971666"
-  integrity sha512-hL4YLpcvCuofi07tTwPKWn3aH0AXyFcecVhh+HTp+UWbLEC6ljnBf6nTxoeuE73pKGYbKlfYncTn2EdtP1VESw==
+"@bigbinary/neeto-icons@^1.7.4":
+  version "1.7.6"
+  resolved "https://registry.yarnpkg.com/@bigbinary/neeto-icons/-/neeto-icons-1.7.6.tgz#22961e938f46e18713226500516bf9eb58a00f33"
+  integrity sha512-MvLbFfkUN2gD1oy/Dy3OFtNzrCAMGzpdG0RnzgLj4lEhpYPFmXlZZ1c2zMIiop9it1Hms07E4Ufw0jfOrJ0ZXA==
   dependencies:
     prop-types "^15.7.2"
     react "^17.0.2"
     react-dom "^17.0.2"
 
-"@bigbinary/neetoui@^2.0.76":
-  version "2.0.76"
-  resolved "https://registry.yarnpkg.com/@bigbinary/neetoui/-/neetoui-2.0.76.tgz#612ae3f4d5d149784b24fa6c34b2b3e6962f174e"
-  integrity sha512-HlEjHxWmNL/VCxaYtDtVhWGZKRv7Ua9m0qYcp2D4OQ68h1iEEJbae3xxcCASqviJDNIg/vZ1qR2ViZYDe8g32w==
+"@bigbinary/neetoui@^2.0.83":
+  version "2.0.83"
+  resolved "https://registry.yarnpkg.com/@bigbinary/neetoui/-/neetoui-2.0.83.tgz#3b97fd0277e02302da6759c6e934ecfc7bb2473f"
+  integrity sha512-vHQQbZqo/MRJ2OS+Fon/56AhhyL9QDCb05QmK4yleaxuSwI/5tCw5PFiSiFHg2B+j0US+eOxxmAn4cGUP/7Fyg==
   dependencies:
-    "@bigbinary/neeto-icons" "^1.7.0"
+    "@bigbinary/neeto-icons" "^1.7.4"
     "@popperjs/core" "^2.9.2"
     "@reach/auto-id" "^0.15.0"
     "@tailwindcss/forms" "^0.3.2"
