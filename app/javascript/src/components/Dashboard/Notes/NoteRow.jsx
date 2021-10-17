@@ -77,6 +77,7 @@ function NoteRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
                 .getMinutes()
                 .toString()
                 .padStart(2, "0") +
+              " " +
               (new Date(note.updated_at).getHours() > 12 ? "PM" : "AM")
             }
             followCursor="horizontal"
@@ -101,7 +102,7 @@ function NoteRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
             }}
             size="small"
             user={{
-              name: user.first_name + " " + user.last_name
+              name: user?.first_name + " " + user?.last_name
             }}
           />
         </div>
