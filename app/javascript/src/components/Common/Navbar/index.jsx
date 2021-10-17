@@ -9,6 +9,7 @@ import authenticationApi from "apis/authentication";
 import { resetAuthTokens } from "apis/axios";
 import { useAuthDispatch } from "contexts/auth";
 import { useUserState } from "contexts/user";
+import { setToLocalStorage } from "helpers/storage";
 
 /* import AccountDropdown from "./AccountDropdown";
 import NavItem from "./NavItem"; */
@@ -20,6 +21,7 @@ const NavBar = () => {
 
   const handleLogout = async () => {
     try {
+      setToLocalStorage("context", null);
       await authenticationApi.logout();
       authDispatch({ type: "LOGOUT" });
       resetAuthTokens();
@@ -66,6 +68,7 @@ const NavBar = () => {
           email: user?.email,
           name: user?.first_name + " " + user?.last_name
         }}
+        isCollapsed
       />
     </div>
   );
