@@ -2,9 +2,9 @@ import React from "react";
 
 import { Check } from "@bigbinary/neeto-icons";
 import { Button } from "@bigbinary/neetoui/v2";
+import { Input, Select } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Form } from "formik";
 import Logger from "js-logger";
-import { Input, Select } from "neetoui/formik";
 import * as yup from "yup";
 
 export default function NewContactForm({ onClose, setNotes, notes }) {
@@ -47,16 +47,24 @@ export default function NewContactForm({ onClose, setNotes, notes }) {
               label="First Name"
               name="firstName"
               className="mb-6 mr-3"
+              placeholder="Enter first name"
               required
             />
             <Input
               label="Last Name"
               name="lastName"
               className="mb-6 ml-3"
+              placeholder="Last first name"
               required
             />
           </div>
-          <Input label="Email" name="email" className="mb-6" required />
+          <Input
+            label="Email"
+            name="email"
+            className="mb-6"
+            placeholder="Enter your email address"
+            required
+          />
           <Select
             label="Role"
             name="role"

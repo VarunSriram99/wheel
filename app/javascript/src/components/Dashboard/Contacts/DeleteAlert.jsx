@@ -40,6 +40,7 @@ export default function DeleteAlert({
         onClick: handleDelete
       }}
       onClose={onClose}
+      closeButton={false}
     >
       <Modal.Header>
         <Typography style="h2">Delete Contact</Typography>

@@ -12,14 +12,14 @@ export default function NewContactPane({
 }) {
   const onClose = () => setShowPane(false);
   return (
-    <Pane isOpen={showPane} onClose={onClose}>
+    <Pane isOpen={showPane} onClose={onClose} size="lg" className="w-5/12">
       <Pane.Header>
         <Typography style="h2" weight="semibold">
-          Add New Note
+          Add New Contact
         </Typography>
       </Pane.Header>
       <Pane.Body>
-        <div className="px-6">
+        <div className="px-6 w-full">
           <NewContactForm onClose={onClose} setNotes={setNotes} notes={notes} />
         </div>
       </Pane.Body>
