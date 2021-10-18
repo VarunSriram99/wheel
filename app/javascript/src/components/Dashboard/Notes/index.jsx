@@ -94,7 +94,7 @@ const Notes = () => {
         <MenuBar.Block label="Finance" count={60} />
         <MenuBar.Block label="User Experience" count={60} />
       </MenuBar>
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <Header
           title="All Notes"
           menuBarToggle={() => {}}
