@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 
 import { Search, Settings, Plus } from "@bigbinary/neeto-icons";
-import { Button, PageLoader, Typography } from "@bigbinary/neetoui/v2";
+import { Button, PageLoader, Typography, Input } from "@bigbinary/neetoui/v2";
 import { MenuBar } from "@bigbinary/neetoui/v2/layouts";
 import { Header } from "@bigbinary/neetoui/v2/layouts";
 import EmptyNotesListImage from "images/EmptyNotesList";
-import { SubHeader } from "neetoui/layouts";
+import Logger from "js-logger";
 
 import notesApi from "apis/notes";
 import EmptyState from "components/Common/EmptyState";
@@ -20,9 +20,6 @@ const Notes = () => {
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
   const [notes, setNotes] = useState([]);
-  const [searchString, setSearchString] = useState(
-    "Search Name, Email, Phone Number, Ect."
-  );
 
   useEffect(() => {
     fetchNotes();
@@ -34,7 +31,7 @@ const Notes = () => {
       const response = await notesApi.fetch();
       setNotes(response.data.notes);
     } catch (error) {
-      logger.error(error);
+      Logger.error(error);
     } finally {
       setLoading(false);
     }
@@ -45,88 +42,83 @@ const Notes = () => {
   }
 
   return (
-    <div className="flex flex-col w-full">
-      <Header
-        title="All Notes"
-        menuBarToggle={() => {
-          alert("Clicked");
-        }}
-        actionBlock={
-          <div className="flex flex-row justify-center">
-            <SubHeader
-              className="w-80"
-              searchProps={{
-                value: searchString,
-                onChange: e => setSearchString(e.target.value),
-                clear: () => setSearchString("")
-              }}
-            />
+    <div className="w-full flex">
+      <MenuBar showMenu="true" title="Notes">
+        <MenuBar.Block label="All" count={200} active />
+        <MenuBar.Block label="Users" count={80} />
+        <MenuBar.Block label="Leads" count={60} />
+        <MenuBar.Block label="Visitors" count={60} />
 
-            <br />
-            <Button
-              onClick={() => setShowNewNotePane(true)}
-              label="Add Note"
-              icon="ri-add-line"
-              style="primary"
-              size="large"
-              //className="w-48"
-            />
-          </div>
-        }
-        toggleMenu={() => {}}
-      />
-      <div className="flex flex-row">
-        <MenuBar showMenu="true" title="Notes">
-          <MenuBar.Block label="All" count={200} active />
-          <MenuBar.Block label="Users" count={80} />
-          <MenuBar.Block label="Leads" count={60} />
-          <MenuBar.Block label="Visitors" count={60} />
-
-          <MenuBar.SubTitle
-            iconProps={[
-              {
-                icon: () => <Search size={20} />
-              }
-            ]}
+        <MenuBar.SubTitle
+          iconProps={[
+            {
+              icon: () => <Search size={20} />
+            }
+          ]}
+        >
+          <Typography
+            component="h4"
+            style="h5"
+            textTransform="uppercase"
+            weight="bold"
           >
-            <Typography
-              component="h4"
-              style="h5"
-              textTransform="uppercase"
-              weight="bold"
-            >
-              Segments
-            </Typography>
-          </MenuBar.SubTitle>
-          <MenuBar.Block label="Europe" count={80} />
-          <MenuBar.Block label="Middle-East" count={60} />
-          <MenuBar.Block label="Asia" count={60} />
-          <MenuBar.SubTitle
-            iconProps={[
-              {
-                icon: () => <Settings size={20} />
-              },
-              {
-                icon: () => <Plus size={20} />
-              },
-              {
-                icon: () => <Search size={20} />
-              }
-            ]}
+            Segments
+          </Typography>
+        </MenuBar.SubTitle>
+        <MenuBar.Block label="Europe" count={80} />
+        <MenuBar.Block label="Middle-East" count={60} />
+        <MenuBar.Block label="Asia" count={60} />
+        <MenuBar.SubTitle
+          iconProps={[
+            {
+              icon: () => <Settings size={20} />
+            },
+            {
+              icon: () => <Plus size={20} />
+            },
+            {
+              icon: () => <Search size={20} />
+            }
+          ]}
+        >
+          <Typography
+            component="h4"
+            style="h5"
+            textTransform="uppercase"
+            weight="bold"
           >
-            <Typography
-              component="h4"
-              style="h5"
-              textTransform="uppercase"
-              weight="bold"
-            >
-              Tags
-            </Typography>
-          </MenuBar.SubTitle>
-          <MenuBar.Block label="Sales" count={80} />
-          <MenuBar.Block label="Finance" count={60} />
-          <MenuBar.Block label="User Experience" count={60} />
-        </MenuBar>
+            Tags
+          </Typography>
+        </MenuBar.SubTitle>
+        <MenuBar.Block label="Sales" count={80} />
+        <MenuBar.Block label="Finance" count={60} />
+        <MenuBar.Block label="User Experience" count={60} />
+      </MenuBar>
+      <div className="flex flex-col">
+        <Header
+          title="All Notes"
+          menuBarToggle={() => {}}
+          actionBlock={
+            <div className="flex flex-row items-center mr-4">
+              <Input
+                className="w-80"
+                prefix={<Search size={16} />}
+                placeholder={"Search Name, Email, Phone Number, Ect."}
+              />
+              {Logger.log(<Search />)}
+              <br />
+              <Button
+                onClick={() => setShowNewNotePane(true)}
+                label="Add Note"
+                icon="ri-add-line"
+                style="primary"
+                size="large"
+                className="ml-2"
+              />
+            </div>
+          }
+          toggleMenu={() => {}}
+        />
         {notes.length ? (
           <>
             <NoteTable

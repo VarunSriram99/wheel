@@ -30,11 +30,15 @@ function NoteRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
   }
   return (
     <>
-      <div className="self-end">
+      <div className="flex justify-between">
+        <Typography style="h4" className="ml-2">
+          {note.title}
+        </Typography>
         <Dropdown
           buttonStyle="icon"
           position="bottom-end"
           icon={MenuVertical}
+          className="self-end"
           closeOnSelect
         >
           <li>Edit</li>
@@ -48,13 +52,10 @@ function NoteRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
           </li>
         </Dropdown>
       </div>
-      <div className="border-b m-3 pb-2">
-        <Typography style="h3">{note.title}</Typography>
-        <Typography style="body1" className="text-gray-500">
-          {note.description}
-        </Typography>
-      </div>
-      <div className="flex flex-row justify-between px-2">
+      <Typography style="body2" className="text-gray-500 border-b mx-2 pb-2">
+        {note.description}
+      </Typography>
+      <div className="flex flex-row justify-between px-2 mt-2">
         <Tag
           color="grey"
           className="bg-gray-100 text-gray-500"
