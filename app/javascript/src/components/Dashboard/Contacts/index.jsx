@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import { Search, Settings, Plus } from "@bigbinary/neeto-icons";
-import { Button, PageLoader, Typography, Input } from "@bigbinary/neetoui/v2";
-import { MenuBar } from "@bigbinary/neetoui/v2/layouts";
-import { Header } from "@bigbinary/neetoui/v2/layouts";
 import EmptyNotesListImage from "images/EmptyNotesList";
+import { Search, Settings, Plus } from "neetoicons";
+import { Button, PageLoader, Typography, Input } from "neetoui";
+import { MenuBar, Header } from "neetoui/layouts";
 
 import EmptyState from "components/Common/EmptyState";
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import { Modal, Typography, Button } from "@bigbinary/neetoui/v2";
 import Logger from "js-logger";
+import { Modal, Typography, Button } from "neetoui";
 
 export default function DeleteAlert({
   onClose,
