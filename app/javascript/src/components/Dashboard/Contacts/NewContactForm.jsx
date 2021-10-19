@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Check } from "@bigbinary/neeto-icons";
-import { Button } from "@bigbinary/neetoui/v2";
 import { Input, Select } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Form } from "formik";
 import Logger from "js-logger";
