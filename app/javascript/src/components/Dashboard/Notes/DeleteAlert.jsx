@@ -21,7 +21,7 @@ export default function DeleteAlert({ refetch, onClose, selectedNoteIds }) {
   return (
     <Modal
       isOpen
-      size="md"
+      size="sm"
       submitButtonProps={{
         style: "primary",
         label: "Continue",
