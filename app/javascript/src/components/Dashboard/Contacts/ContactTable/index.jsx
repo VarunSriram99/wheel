@@ -1,18 +1,16 @@
 import React from "react";
 
-import { Checkbox, Pagination } from "@bigbinary/neetoui/v2";
-import Logger from "js-logger";
+import { Checkbox, Pagination } from "neetoui";
 
-import NoteRow from "./ContactRow";
+import ContactRow from "./ContactRow";
 
 export default function ContactTable({
-  selectedNoteIds,
-  setSelectedNoteIds,
-  notes = [],
-  setShowDeleteAlert
+  selectedContactIds,
+  setSelectedContactIds,
+  contacts = [],
+  setIsDeleteAlertOpen
 }) {
-  Logger.info(JSON.stringify(notes));
-  selectedNoteIds;
+  selectedContactIds;
   return (
     <div className="px-4 w-full">
       <table className="neeto-ui-table neeto-ui-table--checkbox neeto-ui-table--actions">
@@ -28,12 +26,12 @@ export default function ContactTable({
           </tr>
         </thead>
         <tbody>
-          {notes.map((note, id) => (
-            <NoteRow
+          {contacts.map((contact, id) => (
+            <ContactRow
               key={id}
-              note={note}
-              setSelectedNoteIds={setSelectedNoteIds}
-              setShowDeleteAlert={setShowDeleteAlert}
+              contact={contact}
+              setSelectedContactIds={setSelectedContactIds}
+              setIsDeleteAlertOpen={setIsDeleteAlertOpen}
             />
           ))}
         </tbody>

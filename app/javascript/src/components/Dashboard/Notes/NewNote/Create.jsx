@@ -1,14 +1,62 @@
 import React from "react";
 
-import { Check } from "@bigbinary/neeto-icons";
-import { Button, Select } from "@bigbinary/neetoui/v2";
-import { Input, Textarea } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Form } from "formik";
+import { Check } from "neetoicons";
+import { Button, Select } from "neetoui";
+import { Input, Textarea } from "neetoui/formik";
 import * as yup from "yup";
 
 import notesApi from "apis/notes";
 
-export default function NewNoteForm({ onClose, refetch }) {
+export default function Create({ onClose, refetch }) {
+  const assignedContactOptions = [
+    {
+      label: "Contact 1",
+      value: "contact1"
+    },
+    {
+      label: "Contact 2",
+      value: "contact2"
+    },
+    {
+      label: "Contact 3",
+      value: "contact3"
+    }
+  ];
+  const tagsOptions = [
+    {
+      label: "Getting Started",
+      value: "gs"
+    },
+    {
+      label: "Onboarding",
+      value: "ob"
+    },
+    {
+      label: "User Flow",
+      value: "uf"
+    },
+    {
+      label: "UX",
+      value: "ux"
+    },
+    {
+      label: "Bugs",
+      value: "bg"
+    },
+    {
+      label: "V2",
+      value: "v2"
+    }
+  ];
+  const formikInitialValues = {
+    title: "",
+    description: ""
+  };
+  const formikValidationSchema = {
+    title: yup.string().required("Title is required"),
+    description: yup.string().required("Description is required")
+  };
   const handleSubmit = async values => {
     try {
       await notesApi.create(values);
@@ -20,15 +68,9 @@ export default function NewNoteForm({ onClose, refetch }) {
   };
   return (
     <Formik
-      initialValues={{
-        title: "",
-        description: ""
-      }}
+      initialValues={formikInitialValues}
       onSubmit={handleSubmit}
-      validationSchema={yup.object({
-        title: yup.string().required("Title is required"),
-        description: yup.string().required("Description is required")
-      })}
+      validationSchema={yup.object(formikValidationSchema)}
     >
       {({ isSubmitting }) => (
         <Form>
@@ -50,52 +92,14 @@ export default function NewNoteForm({ onClose, refetch }) {
           <Select
             label="Assigned Contact"
             required
-            options={[
-              {
-                label: "Contact 1",
-                value: "contact1"
-              },
-              {
-                label: "Contact 2",
-                value: "contact2"
-              },
-              {
-                label: "Contact 3",
-                value: "contact3"
-              }
-            ]}
+            options={assignedContactOptions}
             placeholder="Select Role"
             className="my-4"
           />
           <Select
             label="Tags"
             required
-            options={[
-              {
-                label: "Getting Started",
-                value: "gs"
-              },
-              {
-                label: "Onboarding",
-                value: "ob"
-              },
-              {
-                label: "User Flow",
-                value: "uf"
-              },
-              {
-                label: "UX",
-                value: "ux"
-              },
-              {
-                label: "Bugs",
-                value: "bg"
-              },
-              {
-                label: "V2",
-                value: "v2"
-              }
-            ]}
+            options={tagsOptions}
             placeholder="Select Role"
             className="my-4"
           />
@@ -112,10 +116,10 @@ export default function NewNoteForm({ onClose, refetch }) {
             />
 
             <Button
-              onClick={onClose}
               label="Cancel"
               size="large"
               style="text"
+              onClick={onClose}
             />
           </div>
         </Form>
