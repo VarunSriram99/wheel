@@ -1,22 +1,20 @@
 import React from "react";
 
 import { Formik, Form } from "formik";
-import Logger from "js-logger";
 import { Check } from "neetoicons";
 import { Button } from "neetoui";
 import { Input, Select } from "neetoui/formik";
 import * as yup from "yup";
 
-export default function NewContactForm({ onClose, setNotes, notes }) {
+export default function NewContactForm({ onClose, setContacts, contacts }) {
   const handleSubmit = values => {
     try {
       let editedValues = values;
       editedValues.role = editedValues.role.value;
-      Logger.log(editedValues);
-      setNotes([...notes, editedValues]);
+      setContacts([...contacts, editedValues]);
       localStorage.setItem(
         "contacts",
-        JSON.stringify([...notes, editedValues])
+        JSON.stringify([...contacts, editedValues])
       );
       onClose();
     } catch (err) {

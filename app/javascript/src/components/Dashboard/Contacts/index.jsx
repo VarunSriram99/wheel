@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import EmptyNotesListImage from "images/EmptyNotesList";
+import Logger from "js-logger";
 import { Search, Settings, Plus } from "neetoicons";
 import { Button, PageLoader, Typography, Input } from "neetoui";
 import { MenuBar, Header } from "neetoui/layouts";
@@ -12,51 +13,56 @@ import DeleteAlert from "./DeleteAlert";
 import NewContactPane from "./NewContactPane";
 
 const Contacts = () => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [isNewContactPaneOpen, setIsNewContactPaneOpen] = useState(false);
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
-  const [selectedNoteIds, setSelectedNoteIds] = useState([]);
-  const [notes, setNotes] = useState([]);
+  const [selectedContactIds, setSelectedContactIds] = useState([]);
+  const [contacts, setContacts] = useState([]);
   useEffect(() => {
-    if (!localStorage.getItem("contacts")) {
-      setNotes([
-        {
-          firstName: "Ronald",
-          lastName: "Richards",
-          email: "albert@borer.com",
-          role: "Owner",
-          createdAt: new Date()
-        },
-        {
-          firstName: "Jacob",
-          lastName: "Jones",
-          email: "albert@borer.com",
-          role: "Owner",
-          createdAt: new Date()
-        },
-        {
-          firstName: "Ronald",
-          lastName: "Richards",
-          email: "albert@borer.com",
-          role: "Owner",
-          createdAt: new Date()
-        },
-        {
-          firstName: "Jacob",
-          lastName: "Jones",
-          email: "albert@borer.com",
-          role: "Owner",
-          createdAt: new Date()
-        }
-      ]);
-      localStorage.setItem("contacts", notes);
-    } else {
-      setNotes(JSON.parse(localStorage.getItem("contacts")));
+    try {
+      if (!localStorage.getItem("contacts")) {
+        setContacts([
+          {
+            firstName: "Ronald",
+            lastName: "Richards",
+            email: "albert@borer.com",
+            role: "Owner",
+            createdAt: new Date()
+          },
+          {
+            firstName: "Jacob",
+            lastName: "Jones",
+            email: "albert@borer.com",
+            role: "Owner",
+            createdAt: new Date()
+          },
+          {
+            firstName: "Ronald",
+            lastName: "Richards",
+            email: "albert@borer.com",
+            role: "Owner",
+            createdAt: new Date()
+          },
+          {
+            firstName: "Jacob",
+            lastName: "Jones",
+            email: "albert@borer.com",
+            role: "Owner",
+            createdAt: new Date()
+          }
+        ]);
+        localStorage.setItem("contacts", contacts);
+      } else {
+        setContacts(JSON.parse(localStorage.getItem("contacts")));
+      }
+    } catch (error) {
+      Logger.error(error);
+    } finally {
+      setIsLoading(false);
     }
-    setLoading(false);
   }, []);
 
-  if (loading) {
+  if (isLoading) {
     return <PageLoader />;
   }
 
@@ -132,20 +138,20 @@ const Contacts = () => {
             }
             toggleMenu={() => {}}
           />
-          {notes.length ? (
+          {contacts.length ? (
             <>
               <ContactTable
-                selectedNoteIds={selectedNoteIds}
-                setSelectedNoteIds={setSelectedNoteIds}
-                notes={notes}
+                selectedContactIds={selectedContactIds}
+                setSelectedContactIds={setSelectedContactIds}
+                contacts={contacts}
                 setIsDeleteAlertOpen={setIsDeleteAlertOpen}
               />
             </>
           ) : (
             <EmptyState
               image={EmptyNotesListImage}
-              title="Looks like you don't have any notes!"
-              subtitle="Add your notes to send customized emails to them."
+              title="Looks like you don't have any contacts!"
+              subtitle="Add your contacts to send customized emails to them."
               primaryAction={() => setIsNewContactPaneOpen(true)}
               primaryActionLabel="Add New Note"
             />
@@ -155,14 +161,14 @@ const Contacts = () => {
       <NewContactPane
         isNewContactPaneOpen={isNewContactPaneOpen}
         setIsNewContactPaneOpen={setIsNewContactPaneOpen}
-        setNotes={setNotes}
-        notes={notes}
+        setContacts={setContacts}
+        contacts={contacts}
       />
       {isDeleteAlertOpen && (
         <DeleteAlert
-          selectedNoteIds={selectedNoteIds}
-          notes={notes}
-          setNotes={setNotes}
+          selectedContactIds={selectedContactIds}
+          contacts={contacts}
+          setContacts={setContacts}
           onClose={() => setIsDeleteAlertOpen(false)}
         />
       )}

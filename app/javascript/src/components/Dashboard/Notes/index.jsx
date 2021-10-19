@@ -14,7 +14,7 @@ import NewNotePane from "./NewNotePane";
 import NoteTable from "./NoteTable";
 
 const Notes = () => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [isNewNotePaneOpen, setIsNewNotePaneOpen] = useState(false);
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
@@ -25,18 +25,18 @@ const Notes = () => {
   }, []);
 
   const fetchNotes = async () => {
+    setIsLoading(true);
     try {
-      setLoading(true);
       const response = await notesApi.fetch();
       setNotes(response.data.notes);
     } catch (error) {
       Logger.error(error);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  if (loading) {
+  if (isLoading) {
     return <PageLoader />;
   }
 

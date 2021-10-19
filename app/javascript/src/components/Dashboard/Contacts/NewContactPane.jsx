@@ -7,8 +7,8 @@ import NewContactForm from "./NewContactForm";
 export default function NewContactPane({
   isNewContactPaneOpen,
   setIsNewContactPaneOpen,
-  setNotes,
-  notes
+  setContacts,
+  contacts
 }) {
   const onClose = () => setIsNewContactPaneOpen(false);
   return (
@@ -25,7 +25,11 @@ export default function NewContactPane({
       </Pane.Header>
       <Pane.Body>
         <div className="px-6 w-full">
-          <NewContactForm onClose={onClose} setNotes={setNotes} notes={notes} />
+          <NewContactForm
+            onClose={onClose}
+            setContacts={setContacts}
+            contacts={contacts}
+          />
         </div>
       </Pane.Body>
     </Pane>

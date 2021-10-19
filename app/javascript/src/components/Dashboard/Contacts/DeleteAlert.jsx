@@ -5,23 +5,23 @@ import { Modal, Typography, Button } from "neetoui";
 
 export default function DeleteAlert({
   onClose,
-  selectedNoteIds,
-  notes,
-  setNotes
+  selectedContactIds,
+  contacts,
+  setContacts
 }) {
   const [deleting, setDeleting] = useState(false);
   const handleDelete = async () => {
     try {
       setDeleting(true);
-      let deletedNotes = notes;
-      deletedNotes.splice(
-        deletedNotes.findIndex(
-          element => element.createdAt == selectedNoteIds[0]
+      let deletedcontacts = contacts;
+      deletedcontacts.splice(
+        deletedcontacts.findIndex(
+          element => element.createdAt == selectedContactIds[0]
         ),
         1
       );
-      setNotes(deletedNotes);
-      localStorage.setItem("contacts", JSON.stringify(deletedNotes));
+      setContacts(deletedcontacts);
+      localStorage.setItem("contacts", JSON.stringify(deletedcontacts));
       onClose();
     } catch (error) {
       Logger.error(error);

@@ -3,9 +3,9 @@ import React from "react";
 import { MenuHorizontal } from "neetoicons";
 import { Avatar, Dropdown, Checkbox } from "neetoui";
 
-function ContactRow({ note, setSelectedNoteIds, setIsDeleteAlertOpen }) {
+function ContactRow({ contact, setSelectedContactIds, setIsDeleteAlertOpen }) {
   function deleteHandle(e) {
-    setSelectedNoteIds([e.target.id]);
+    setSelectedContactIds([e.target.id]);
     setIsDeleteAlertOpen(true);
   }
   return (
@@ -15,16 +15,16 @@ function ContactRow({ note, setSelectedNoteIds, setIsDeleteAlertOpen }) {
           <Checkbox />
         </td>
         <td className="flex flex-row items-center">
-          <Avatar user={{ name: note.firstName + " " + note.lastName }} />
+          <Avatar user={{ name: contact.firstName + " " + contact.lastName }} />
           &nbsp;&nbsp;
           <div className="flex-col flex">
-            <p>{note.firstName + " " + note.lastName}</p>
-            <p>{note.role}</p>
+            <p>{contact.firstName + " " + contact.lastName}</p>
+            <p>{contact.role}</p>
           </div>
         </td>
-        <td>{note.email}</td>
+        <td>{contact.email}</td>
         <td>
-          {new Date(note.createdAt)
+          {new Date(contact.createdAt)
             .toDateString()
             .split(" ")
             .slice(1)
@@ -38,7 +38,7 @@ function ContactRow({ note, setSelectedNoteIds, setIsDeleteAlertOpen }) {
             closeOnSelect
           >
             <li
-              id={note.createdAt}
+              id={contact.createdAt}
               onClick={e => {
                 deleteHandle(e);
               }}
