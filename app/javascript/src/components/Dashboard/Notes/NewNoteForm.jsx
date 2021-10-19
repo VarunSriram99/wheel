@@ -9,6 +9,46 @@ import * as yup from "yup";
 import notesApi from "apis/notes";
 
 export default function NewNoteForm({ onClose, refetch }) {
+  const assignedContactOptions = [
+    {
+      label: "Contact 1",
+      value: "contact1"
+    },
+    {
+      label: "Contact 2",
+      value: "contact2"
+    },
+    {
+      label: "Contact 3",
+      value: "contact3"
+    }
+  ];
+  const tagsOptions = [
+    {
+      label: "Getting Started",
+      value: "gs"
+    },
+    {
+      label: "Onboarding",
+      value: "ob"
+    },
+    {
+      label: "User Flow",
+      value: "uf"
+    },
+    {
+      label: "UX",
+      value: "ux"
+    },
+    {
+      label: "Bugs",
+      value: "bg"
+    },
+    {
+      label: "V2",
+      value: "v2"
+    }
+  ];
   const handleSubmit = async values => {
     try {
       await notesApi.create(values);
@@ -50,52 +90,14 @@ export default function NewNoteForm({ onClose, refetch }) {
           <Select
             label="Assigned Contact"
             required
-            options={[
-              {
-                label: "Contact 1",
-                value: "contact1"
-              },
-              {
-                label: "Contact 2",
-                value: "contact2"
-              },
-              {
-                label: "Contact 3",
-                value: "contact3"
-              }
-            ]}
+            options={assignedContactOptions}
             placeholder="Select Role"
             className="my-4"
           />
           <Select
             label="Tags"
             required
-            options={[
-              {
-                label: "Getting Started",
-                value: "gs"
-              },
-              {
-                label: "Onboarding",
-                value: "ob"
-              },
-              {
-                label: "User Flow",
-                value: "uf"
-              },
-              {
-                label: "UX",
-                value: "ux"
-              },
-              {
-                label: "Bugs",
-                value: "bg"
-              },
-              {
-                label: "V2",
-                value: "v2"
-              }
-            ]}
+            options={tagsOptions}
             placeholder="Select Role"
             className="my-4"
           />

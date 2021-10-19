@@ -24,6 +24,18 @@ const Notes = () => {
     fetchNotes();
   }, []);
 
+  const menuBarIconProps = [
+    {
+      icon: () => <Settings size={20} />
+    },
+    {
+      icon: () => <Plus size={20} />
+    },
+    {
+      icon: () => <Search size={20} />
+    }
+  ];
+
   const fetchNotes = async () => {
     setIsLoading(true);
     try {
@@ -67,19 +79,7 @@ const Notes = () => {
         <MenuBar.Block label="Europe" count={80} />
         <MenuBar.Block label="Middle-East" count={60} />
         <MenuBar.Block label="Asia" count={60} />
-        <MenuBar.SubTitle
-          iconProps={[
-            {
-              icon: () => <Settings size={20} />
-            },
-            {
-              icon: () => <Plus size={20} />
-            },
-            {
-              icon: () => <Search size={20} />
-            }
-          ]}
-        >
+        <MenuBar.SubTitle iconProps={menuBarIconProps}>
           <Typography
             component="h4"
             style="h5"
@@ -102,7 +102,7 @@ const Notes = () => {
               <Input
                 className="w-80"
                 prefix={<Search size={16} />}
-                placeholder={"Search Name, Email, Phone Number, Ect."}
+                placeholder="Search Name, Email, Phone Number, Ect."
               />
               <br />
               <Button

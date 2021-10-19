@@ -18,39 +18,51 @@ const Contacts = () => {
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   const [selectedContactIds, setSelectedContactIds] = useState([]);
   const [contacts, setContacts] = useState([]);
+  const menuBarIconProps = [
+    {
+      icon: () => <Settings size={20} />
+    },
+    {
+      icon: () => <Plus size={20} />
+    },
+    {
+      icon: () => <Search size={20} />
+    }
+  ];
+  const contactsSeedData = [
+    {
+      firstName: "Ronald",
+      lastName: "Richards",
+      email: "albert@borer.com",
+      role: "Owner",
+      createdAt: new Date()
+    },
+    {
+      firstName: "Jacob",
+      lastName: "Jones",
+      email: "albert@borer.com",
+      role: "Owner",
+      createdAt: new Date()
+    },
+    {
+      firstName: "Ronald",
+      lastName: "Richards",
+      email: "albert@borer.com",
+      role: "Owner",
+      createdAt: new Date()
+    },
+    {
+      firstName: "Jacob",
+      lastName: "Jones",
+      email: "albert@borer.com",
+      role: "Owner",
+      createdAt: new Date()
+    }
+  ];
   useEffect(() => {
     try {
       if (!localStorage.getItem("contacts")) {
-        setContacts([
-          {
-            firstName: "Ronald",
-            lastName: "Richards",
-            email: "albert@borer.com",
-            role: "Owner",
-            createdAt: new Date()
-          },
-          {
-            firstName: "Jacob",
-            lastName: "Jones",
-            email: "albert@borer.com",
-            role: "Owner",
-            createdAt: new Date()
-          },
-          {
-            firstName: "Ronald",
-            lastName: "Richards",
-            email: "albert@borer.com",
-            role: "Owner",
-            createdAt: new Date()
-          },
-          {
-            firstName: "Jacob",
-            lastName: "Jones",
-            email: "albert@borer.com",
-            role: "Owner",
-            createdAt: new Date()
-          }
-        ]);
+        setContacts(contactsSeedData);
         localStorage.setItem("contacts", contacts);
       } else {
         setContacts(JSON.parse(localStorage.getItem("contacts")));
@@ -91,19 +103,7 @@ const Contacts = () => {
               Segments
             </Typography>
           </MenuBar.SubTitle>
-          <MenuBar.SubTitle
-            iconProps={[
-              {
-                icon: () => <Settings size={20} />
-              },
-              {
-                icon: () => <Plus size={20} />
-              },
-              {
-                icon: () => <Search size={20} />
-              }
-            ]}
-          >
+          <MenuBar.SubTitle iconProps={menuBarIconProps}>
             <Typography
               component="h4"
               style="h5"

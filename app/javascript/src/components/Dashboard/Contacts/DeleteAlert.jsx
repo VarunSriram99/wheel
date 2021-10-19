@@ -9,10 +9,10 @@ export default function DeleteAlert({
   contacts,
   setContacts
 }) {
-  const [deleting, setDeleting] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const handleDelete = async () => {
+    setIsDeleting(true);
     try {
-      setDeleting(true);
       let deletedcontacts = contacts;
       deletedcontacts.splice(
         deletedcontacts.findIndex(
@@ -26,7 +26,7 @@ export default function DeleteAlert({
     } catch (error) {
       Logger.error(error);
     } finally {
-      setDeleting(false);
+      setIsDeleting(false);
     }
   };
   return (
@@ -36,7 +36,7 @@ export default function DeleteAlert({
       submitButtonProps={{
         style: "primary",
         label: "Continue",
-        loading: deleting,
+        loading: isDeleting,
         onClick: handleDelete
       }}
       onClose={onClose}
