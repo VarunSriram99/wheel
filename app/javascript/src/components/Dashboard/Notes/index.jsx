@@ -108,7 +108,6 @@ const Notes = () => {
                 prefix={<Search size={16} />}
                 placeholder={"Search Name, Email, Phone Number, Ect."}
               />
-              {Logger.log(<Search />)}
               <br />
               <Button
                 onClick={() => setShowNewNotePane(true)}

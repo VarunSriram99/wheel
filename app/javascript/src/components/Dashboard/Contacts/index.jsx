@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 import { Search, Settings, Plus } from "@bigbinary/neeto-icons";
-import { Button, PageLoader, Typography } from "@bigbinary/neetoui/v2";
+import { Button, PageLoader, Typography, Input } from "@bigbinary/neetoui/v2";
 import { MenuBar } from "@bigbinary/neetoui/v2/layouts";
 import { Header } from "@bigbinary/neetoui/v2/layouts";
 import EmptyNotesListImage from "images/EmptyNotesList";
-import { SubHeader } from "neetoui/layouts";
 
 import EmptyState from "components/Common/EmptyState";
 
@@ -19,7 +18,6 @@ const Contacts = () => {
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
   const [notes, setNotes] = useState([]);
-  const [searchString, setSearchString] = useState("");
 
   useEffect(() => {
     if (!localStorage.getItem("contacts")) {
@@ -65,35 +63,8 @@ const Contacts = () => {
   }
 
   return (
-    <div className="flex flex-col w-full">
-      <Header
-        title="All Contacts"
-        menuBarToggle={() => {}}
-        actionBlock={
-          <div className="flex flex-row justify-between ml-80">
-            <SubHeader
-              className="w-80 mx-5"
-              searchProps={{
-                value: searchString,
-                onChange: e => setSearchString(e.target.value),
-                clear: () => setSearchString("")
-              }}
-            />
-
-            <br />
-            <Button
-              onClick={() => setShowNewContactPane(true)}
-              label="Add Contact"
-              icon="ri-add-line"
-              style="primary"
-              size="large"
-              //className="w-48"
-            />
-          </div>
-        }
-        toggleMenu={() => {}}
-      />
-      <div className="flex flex-row">
+    <div className="flex flex-row w-full">
+      <div className="flex flex-row w-full">
         <MenuBar showMenu="true" title="Contacts">
           <MenuBar.Block label="All" count={0} active />
           <MenuBar.Block label="Archived" count={0} />
@@ -139,24 +110,49 @@ const Contacts = () => {
             </Typography>
           </MenuBar.SubTitle>
         </MenuBar>
-        {notes.length ? (
-          <>
-            <ContactTable
-              selectedNoteIds={selectedNoteIds}
-              setSelectedNoteIds={setSelectedNoteIds}
-              notes={notes}
-              setShowDeleteAlert={setShowDeleteAlert}
-            />
-          </>
-        ) : (
-          <EmptyState
-            image={EmptyNotesListImage}
-            title="Looks like you don't have any notes!"
-            subtitle="Add your notes to send customized emails to them."
-            primaryAction={() => setShowNewContactPane(true)}
-            primaryActionLabel="Add New Note"
+        <div className="flex flex-col w-full">
+          <Header
+            title="All Contacts"
+            menuBarToggle={() => {}}
+            actionBlock={
+              <div className="flex flex-row items-center mr-4">
+                <Input
+                  className="w-80"
+                  prefix={<Search size={16} />}
+                  placeholder={"Search Name, Email, Phone Number, Ect."}
+                />
+                <br />
+                <Button
+                  onClick={() => setShowNewContactPane(true)}
+                  label="Add Contact"
+                  icon="ri-add-line"
+                  style="primary"
+                  size="large"
+                  className="ml-2"
+                />
+              </div>
+            }
+            toggleMenu={() => {}}
           />
-        )}
+          {notes.length ? (
+            <>
+              <ContactTable
+                selectedNoteIds={selectedNoteIds}
+                setSelectedNoteIds={setSelectedNoteIds}
+                notes={notes}
+                setShowDeleteAlert={setShowDeleteAlert}
+              />
+            </>
+          ) : (
+            <EmptyState
+              image={EmptyNotesListImage}
+              title="Looks like you don't have any notes!"
+              subtitle="Add your notes to send customized emails to them."
+              primaryAction={() => setShowNewContactPane(true)}
+              primaryActionLabel="Add New Note"
+            />
+          )}
+        </div>
       </div>
       <NewContactPane
         showPane={showNewContactPane}
