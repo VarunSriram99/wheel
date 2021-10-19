@@ -20,6 +20,9 @@ const Notes = () => {
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
   const [notes, setNotes] = useState([]);
+  const [searchString, setSearchString] = useState(
+    "Search Name, Email, Phone Number, Ect."
+  );
 
   useEffect(() => {
     fetchNotes();
