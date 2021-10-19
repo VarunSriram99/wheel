@@ -4,19 +4,7 @@ import Logger from "js-logger";
 import { Clock, MenuVertical } from "neetoicons";
 import { Typography, Tag, Avatar, Dropdown, Tooltip } from "neetoui";
 
-import { useUserState } from "contexts/user";
-
 function NoteRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
-  const { user } = useUserState();
-  const day = {
-    1: "Monday",
-    2: "Tuesday",
-    3: "Wednesday",
-    4: "Thursday",
-    5: "Friday",
-    6: "Saturday",
-    0: "Sunday"
-  };
   function deleteHandle(e) {
     setSelectedNoteIds([e.target.id]);
     setShowDeleteAlert(true);
@@ -57,40 +45,16 @@ function NoteRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
           size="large"
         />
         <div className="flex flex-row items-center">
-          <Tooltip
-            content={
-              day[new Date(note.updated_at).getDay()] +
-              ", " +
-              (new Date(note.updated_at).getHours() > 12
-                ? parseInt(new Date(note.updated_at).getHours()) - 12
-                : new Date(note.updated_at).getHours()
-              )
-                .toString()
-                .padStart(2, "0") +
-              ":" +
-              new Date(note.updated_at)
-                .getMinutes()
-                .toString()
-                .padStart(2, "0") +
-              " " +
-              (new Date(note.updated_at).getHours() > 12 ? "PM" : "AM")
-            }
-            followCursor="horizontal"
-            placement="bottom"
-          >
-            <div className="flex flex-row items-center">
-              <Clock color="grey" size={15} />
-              &nbsp;
-              {note.created_at === note.updated_at
-                ? "Created " +
-                  parseInt((new Date() - new Date(note.created_at)) / 3600000) +
-                  " hours ago "
-                : "Drafted " +
-                  parseInt((new Date() - new Date(note.updated_at)) / 3600000) +
-                  " hours ago "}
-              &nbsp;
-            </div>
-          </Tooltip>
+          <Clock color="grey" size={15} />
+          &nbsp;
+          {note.created_at === note.updated_at
+            ? "Created " +
+              parseInt((new Date() - new Date(note.created_at)) / 3600000) +
+              " hours ago "
+            : "Drafted " +
+              parseInt((new Date() - new Date(note.updated_at)) / 3600000) +
+              " hours ago "}
+          &nbsp;
           <Avatar
             onClick={{
               onClick: function noRefCheck() {}
