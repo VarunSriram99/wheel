@@ -45,10 +45,10 @@ export default function DeleteAlert({ refetch, onClose, selectedNoteIds }) {
         <Button
           style="text"
           label="Cancel"
+          size="large"
           onClick={() => {
             onClose();
           }}
-          size="large"
         />
       </Modal.Footer>
     </Modal>

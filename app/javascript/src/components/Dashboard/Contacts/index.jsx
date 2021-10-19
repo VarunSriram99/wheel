@@ -10,7 +10,7 @@ import EmptyState from "components/Common/EmptyState";
 
 import ContactTable from "./ContactTable";
 import DeleteAlert from "./DeleteAlert";
-import NewContactPane from "./NewContactPane";
+import NewContact from "./NewContact";
 
 const Contacts = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -158,7 +158,7 @@ const Contacts = () => {
           )}
         </div>
       </div>
-      <NewContactPane
+      <NewContact
         isNewContactPaneOpen={isNewContactPaneOpen}
         setIsNewContactPaneOpen={setIsNewContactPaneOpen}
         setContacts={setContacts}

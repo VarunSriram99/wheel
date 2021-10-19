@@ -2,9 +2,9 @@ import React from "react";
 
 import { Pane, Typography } from "neetoui";
 
-import NewContactForm from "./NewContactForm";
+import Create from "./Create";
 
-export default function NewContactPane({
+export default function NewContact({
   isNewContactPaneOpen,
   setIsNewContactPaneOpen,
   setContacts,
@@ -13,10 +13,10 @@ export default function NewContactPane({
   const onClose = () => setIsNewContactPaneOpen(false);
   return (
     <Pane
-      isOpen={isNewContactPaneOpen}
-      onClose={onClose}
       size="lg"
       className="w-5/12"
+      isOpen={isNewContactPaneOpen}
+      onClose={onClose}
     >
       <Pane.Header>
         <Typography style="h2" weight="semibold">
@@ -25,10 +25,10 @@ export default function NewContactPane({
       </Pane.Header>
       <Pane.Body>
         <div className="px-6 w-full">
-          <NewContactForm
-            onClose={onClose}
+          <Create
             setContacts={setContacts}
             contacts={contacts}
+            onClose={onClose}
           />
         </div>
       </Pane.Body>

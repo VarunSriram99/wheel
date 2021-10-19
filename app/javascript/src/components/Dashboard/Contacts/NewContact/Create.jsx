@@ -6,7 +6,30 @@ import { Button } from "neetoui";
 import { Input, Select } from "neetoui/formik";
 import * as yup from "yup";
 
-export default function NewContactForm({ onClose, setContacts, contacts }) {
+export default function Create({ onClose, setContacts, contacts }) {
+  const roleOptions = [
+    {
+      label: "Owner",
+      value: "Owner"
+    },
+    {
+      label: "Employee",
+      value: "Employee"
+    }
+  ];
+  const formikValidationSchema = {
+    firstName: yup.string().required("First Name is required"),
+    lastName: yup.string().required("Last Name is required"),
+    email: yup.string().required("Email is required"),
+    role: yup.object().required("Role is required")
+  };
+  const formikInitialValues = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    role: "",
+    createdAt: new Date()
+  };
   const handleSubmit = values => {
     try {
       let editedValues = values;
@@ -23,20 +46,9 @@ export default function NewContactForm({ onClose, setContacts, contacts }) {
   };
   return (
     <Formik
-      initialValues={{
-        firstName: "",
-        lastName: "",
-        email: "",
-        role: "",
-        createdAt: new Date()
-      }}
+      initialValues={formikInitialValues}
       onSubmit={handleSubmit}
-      validationSchema={yup.object({
-        firstName: yup.string().required("First Name is required"),
-        lastName: yup.string().required("Last Name is required"),
-        email: yup.string().required("Email is required"),
-        role: yup.object().required("Role is required")
-      })}
+      validationSchema={yup.object(formikValidationSchema)}
     >
       {({ isSubmitting }) => (
         <Form>
@@ -67,18 +79,9 @@ export default function NewContactForm({ onClose, setContacts, contacts }) {
             label="Role"
             name="role"
             required
-            options={[
-              {
-                label: "Owner",
-                value: "Owner"
-              },
-              {
-                label: "Employee",
-                value: "Employee"
-              }
-            ]}
+            options={roleOptions}
             placeholder="Select Role"
-            className="my-4 w-96"
+            className="my-4"
           />
 
           <div className="nui-pane__footer nui-pane__footer--absolute my-4">
@@ -94,10 +97,10 @@ export default function NewContactForm({ onClose, setContacts, contacts }) {
             />
 
             <Button
-              onClick={onClose}
               label="Cancel"
               size="large"
               style="text"
+              onClick={onClose}
             />
           </div>
         </Form>

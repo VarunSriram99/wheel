@@ -8,7 +8,7 @@ import * as yup from "yup";
 
 import notesApi from "apis/notes";
 
-export default function NewNoteForm({ onClose, refetch }) {
+export default function Create({ onClose, refetch }) {
   const assignedContactOptions = [
     {
       label: "Contact 1",
@@ -49,6 +49,14 @@ export default function NewNoteForm({ onClose, refetch }) {
       value: "v2"
     }
   ];
+  const formikInitialValues = {
+    title: "",
+    description: ""
+  };
+  const formikValidationSchema = {
+    title: yup.string().required("Title is required"),
+    description: yup.string().required("Description is required")
+  };
   const handleSubmit = async values => {
     try {
       await notesApi.create(values);
@@ -60,15 +68,9 @@ export default function NewNoteForm({ onClose, refetch }) {
   };
   return (
     <Formik
-      initialValues={{
-        title: "",
-        description: ""
-      }}
+      initialValues={formikInitialValues}
       onSubmit={handleSubmit}
-      validationSchema={yup.object({
-        title: yup.string().required("Title is required"),
-        description: yup.string().required("Description is required")
-      })}
+      validationSchema={yup.object(formikValidationSchema)}
     >
       {({ isSubmitting }) => (
         <Form>
@@ -114,10 +116,10 @@ export default function NewNoteForm({ onClose, refetch }) {
             />
 
             <Button
-              onClick={onClose}
               label="Cancel"
               size="large"
               style="text"
+              onClick={onClose}
             />
           </div>
         </Form>

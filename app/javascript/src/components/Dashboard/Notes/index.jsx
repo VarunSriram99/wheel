@@ -9,9 +9,9 @@ import { MenuBar, Header } from "neetoui/layouts";
 import notesApi from "apis/notes";
 import EmptyState from "components/Common/EmptyState";
 
+import Cards from "./Card";
 import DeleteAlert from "./DeleteAlert";
-import NewNotePane from "./NewNotePane";
-import NoteTable from "./NoteTable";
+import NewNote from "./NewNote";
 
 const Notes = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -119,8 +119,7 @@ const Notes = () => {
         />
         {notes.length ? (
           <>
-            <NoteTable
-              selectedNoteIds={selectedNoteIds}
+            <Cards
               setSelectedNoteIds={setSelectedNoteIds}
               notes={notes}
               setIsDeleteAlertOpen={setIsDeleteAlertOpen}
@@ -136,7 +135,7 @@ const Notes = () => {
           />
         )}
       </div>
-      <NewNotePane
+      <NewNote
         isNewNotePaneOpen={isNewNotePaneOpen}
         setIsNewNotePaneOpen={setIsNewNotePaneOpen}
         fetchNotes={fetchNotes}
@@ -144,8 +143,8 @@ const Notes = () => {
       {isDeleteAlertOpen && (
         <DeleteAlert
           selectedNoteIds={selectedNoteIds}
-          onClose={() => setIsDeleteAlertOpen(false)}
           refetch={fetchNotes}
+          onClose={() => setIsDeleteAlertOpen(false)}
         />
       )}
     </div>

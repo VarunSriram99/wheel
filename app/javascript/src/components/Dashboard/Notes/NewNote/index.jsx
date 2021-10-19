@@ -2,9 +2,9 @@ import React from "react";
 
 import { Pane, Typography } from "neetoui";
 
-import NewNoteForm from "./NewNoteForm";
+import Create from "./Create";
 
-export default function NewNotePane({
+export default function NewNote({
   fetchNotes,
   isNewNotePaneOpen,
   setIsNewNotePaneOpen
@@ -24,7 +24,7 @@ export default function NewNotePane({
       </Pane.Header>
       <Pane.Body>
         <div className="px-6 w-full">
-          <NewNoteForm onClose={onClose} refetch={fetchNotes} />
+          <Create onClose={onClose} refetch={fetchNotes} />
         </div>
       </Pane.Body>
     </Pane>

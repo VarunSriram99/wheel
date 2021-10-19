@@ -39,8 +39,8 @@ export default function DeleteAlert({
         loading: isDeleting,
         onClick: handleDelete
       }}
-      onClose={onClose}
       closeButton={false}
+      onClose={onClose}
     >
       <Modal.Header>
         <Typography style="h2">Delete Contact</Typography>
@@ -52,7 +52,7 @@ export default function DeleteAlert({
         </Typography>
       </Modal.Body>
       <Modal.Footer className="space-x-2">
-        <Button label="Continue" onClick={() => handleDelete()} size="large" />
+        <Button label="Continue" size="large" onClick={() => handleDelete()} />
         <Button
           style="text"
           label="Cancel"
