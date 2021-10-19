@@ -2,8 +2,8 @@ import React from "react";
 
 import { Check } from "@bigbinary/neeto-icons";
 import { Button, Select } from "@bigbinary/neetoui/v2";
+import { Input, Textarea } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Form } from "formik";
-import { Input, Textarea } from "neetoui/formik";
 import * as yup from "yup";
 
 import notesApi from "apis/notes";
@@ -32,8 +32,21 @@ export default function NewNoteForm({ onClose, refetch }) {
     >
       {({ isSubmitting }) => (
         <Form>
-          <Input label="Title" name="title" className="mb-6 w-96" required />
-          <Textarea label="Description" name="description" rows={1} required />
+          <Input
+            label="Title"
+            name="title"
+            size="large"
+            className="mb-6 w-full"
+            placeholder="Enter title"
+            required
+          />
+          <Textarea
+            placeholder="Enter note description"
+            label="Description"
+            name="description"
+            rows={1}
+            required
+          />
           <Select
             label="Assigned Contact"
             required
