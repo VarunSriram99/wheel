@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Checkbox, Pagination } from "@bigbinary/neetoui/v2";
 import Logger from "js-logger";
+import { Checkbox, Pagination } from "neetoui";
 
 import NoteRow from "./ContactRow";
 

@@ -1,9 +1,10 @@
 import React from "react";
 
-import { Check } from "@bigbinary/neeto-icons";
-import { Input, Select } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Form } from "formik";
 import Logger from "js-logger";
+import { Check } from "neetoicons";
+import { Button } from "neetoui";
+import { Input, Select } from "neetoui/formik";
 import * as yup from "yup";
 
 export default function NewContactForm({ onClose, setNotes, notes }) {

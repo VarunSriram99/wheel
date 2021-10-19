@@ -1,7 +1,7 @@
 import React from "react";
 
-import { MenuHorizontal } from "@bigbinary/neeto-icons";
-import { Avatar, Dropdown, Checkbox } from "@bigbinary/neetoui/v2";
+import { MenuHorizontal } from "neetoicons";
+import { Avatar, Dropdown, Checkbox } from "neetoui";
 
 function ContactRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
   function deleteHandle(e) {

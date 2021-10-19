@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import { Search, Settings, Plus } from "@bigbinary/neeto-icons";
-import { Button, PageLoader, Typography, Input } from "@bigbinary/neetoui/v2";
-import { MenuBar } from "@bigbinary/neetoui/v2/layouts";
-import { Header } from "@bigbinary/neetoui/v2/layouts";
 import EmptyNotesListImage from "images/EmptyNotesList";
 import Logger from "js-logger";
+import { Search, Settings, Plus } from "neetoicons";
+import { Button, PageLoader, Typography, Input } from "neetoui";
+import { MenuBar, Header } from "neetoui/layouts";
 
 import notesApi from "apis/notes";
 import EmptyState from "components/Common/EmptyState";
@@ -97,7 +96,7 @@ const Notes = () => {
         <MenuBar.Block label="Finance" count={60} />
         <MenuBar.Block label="User Experience" count={60} />
       </MenuBar>
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <Header
           title="All Notes"
           menuBarToggle={() => {}}

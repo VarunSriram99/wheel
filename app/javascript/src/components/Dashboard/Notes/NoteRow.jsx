@@ -1,8 +1,8 @@
 import React from "react";
 
-import { Clock, MenuVertical } from "@bigbinary/neeto-icons";
-import { Typography, Tag, Avatar, Dropdown } from "@bigbinary/neetoui/v2";
 import Logger from "js-logger";
+import { Clock, MenuVertical } from "neetoicons";
+import { Typography, Tag, Avatar, Dropdown, Tooltip } from "neetoui";
 
 function NoteRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
   function deleteHandle(e) {

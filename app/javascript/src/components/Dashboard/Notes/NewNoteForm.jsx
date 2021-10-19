@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Check } from "@bigbinary/neeto-icons";
-import { Button, Select } from "@bigbinary/neetoui/v2";
-import { Input, Textarea } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Form } from "formik";
+import { Check } from "neetoicons";
+import { Button, Select } from "neetoui";
+import { Input, Textarea } from "neetoui/formik";
 import * as yup from "yup";
 
 import notesApi from "apis/notes";
