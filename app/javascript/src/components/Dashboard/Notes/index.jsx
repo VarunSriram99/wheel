@@ -56,7 +56,6 @@ const Notes = () => {
           <div className="flex flex-row justify-center">
             <SubHeader
               className="w-80"
-
               searchProps={{
                 value: searchString,
                 onChange: e => setSearchString(e.target.value),

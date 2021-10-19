@@ -9,9 +9,7 @@ import authenticationApi from "apis/authentication";
 import { resetAuthTokens } from "apis/axios";
 import { useAuthDispatch } from "contexts/auth";
 import { useUserState } from "contexts/user";
-
-/* import AccountDropdown from "./AccountDropdown";
-import NavItem from "./NavItem"; */
+import { setToLocalStorage } from "helpers/storage";
 
 const NavBar = () => {
   let history = useHistory();
@@ -20,6 +18,7 @@ const NavBar = () => {
 
   const handleLogout = async () => {
     try {
+      setToLocalStorage("context", null);
       await authenticationApi.logout();
       authDispatch({ type: "LOGOUT" });
       resetAuthTokens();

@@ -3,6 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import userReducer from "reducers/user";
+import { getFromLocalStorage, setToLocalStorage } from "helpers/storage";
 
 const UserStateContext = React.createContext();
 const UserDispatchContext = React.createContext();
@@ -20,11 +21,15 @@ const UserProvider = ({ children }) => {
 };
 
 const useUserState = () => {
-  const context = React.useContext(UserStateContext);
+  //const context = React.useContext(UserStateContext);
+  let context = React.useContext(UserStateContext);
   if (context === undefined) {
     throw new Error("useUserState must be used within a UserProvider");
   }
-
+  /********************************************/
+  if (context.user) setToLocalStorage("context", JSON.stringify(context));
+  else context = JSON.parse(getFromLocalStorage("context"));
+  /********************************************/
   return context;
 };
 
