@@ -21,7 +21,7 @@ export default function NoteTable({
               key={note.id}
               className={"cursor-pointer bg-white hover:bg-gray-50 my-2"}
             >
-              <td className="flex flex-col neeto-ui-shadow-xl shadow border-solid border w-full my-2 rounded-sm">
+              <td className="flex flex-col neeto-ui-shadow-xl shadow border-solid border w-full rounded-sm my-2">
                 <NoteRow
                   note={note}
                   setSelectedNoteIds={setSelectedNoteIds}

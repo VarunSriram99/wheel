@@ -9,6 +9,7 @@ import authenticationApi from "apis/authentication";
 import { resetAuthTokens } from "apis/axios";
 import { useAuthDispatch } from "contexts/auth";
 import { useUserState } from "contexts/user";
+import { setToLocalStorage } from "helpers/storage";
 
 const NavBar = () => {
   let history = useHistory();
@@ -51,9 +52,10 @@ const NavBar = () => {
               to: "/misc"
             }
           ],
-          email: user.email,
-          name: user.first_name + " " + user.last_name
+          email: user?.email,
+          name: user?.first_name + " " + user?.last_name
         }}
+        isCollapsed
       />
     </div>
   );
