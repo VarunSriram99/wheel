@@ -6,7 +6,7 @@ import { Typography, Tag, Avatar, Dropdown, Tooltip } from "neetoui";
 
 import { useUserState } from "contexts/user";
 
-function NoteRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
+function NoteRow({ note, setSelectedNoteIds, setIsDeleteAlertOpen }) {
   const { user } = useUserState();
   const day = {
     1: "Monday",
@@ -19,7 +19,7 @@ function NoteRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
   };
   function deleteHandle(e) {
     setSelectedNoteIds([e.target.id]);
-    setShowDeleteAlert(true);
+    setIsDeleteAlertOpen(true);
     Logger.log(e.target.id);
   }
   return (

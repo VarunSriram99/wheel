@@ -9,7 +9,7 @@ export default function ContactTable({
   selectedNoteIds,
   setSelectedNoteIds,
   notes = [],
-  setShowDeleteAlert
+  setIsDeleteAlertOpen
 }) {
   Logger.info(JSON.stringify(notes));
   selectedNoteIds;
@@ -33,7 +33,7 @@ export default function ContactTable({
               key={id}
               note={note}
               setSelectedNoteIds={setSelectedNoteIds}
-              setShowDeleteAlert={setShowDeleteAlert}
+              setIsDeleteAlertOpen={setIsDeleteAlertOpen}
             />
           ))}
         </tbody>

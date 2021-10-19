@@ -3,10 +3,10 @@ import React from "react";
 import { MenuHorizontal } from "neetoicons";
 import { Avatar, Dropdown, Checkbox } from "neetoui";
 
-function ContactRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
+function ContactRow({ note, setSelectedNoteIds, setIsDeleteAlertOpen }) {
   function deleteHandle(e) {
     setSelectedNoteIds([e.target.id]);
-    setShowDeleteAlert(true);
+    setIsDeleteAlertOpen(true);
   }
   return (
     <>

@@ -13,11 +13,10 @@ import NewContactPane from "./NewContactPane";
 
 const Contacts = () => {
   const [loading, setLoading] = useState(true);
-  const [showNewContactPane, setShowNewContactPane] = useState(false);
-  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  const [isNewContactPaneOpen, setIsNewContactPaneOpen] = useState(false);
+  const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
   const [notes, setNotes] = useState([]);
-
   useEffect(() => {
     if (!localStorage.getItem("contacts")) {
       setNotes([
@@ -122,7 +121,7 @@ const Contacts = () => {
                 />
                 <br />
                 <Button
-                  onClick={() => setShowNewContactPane(true)}
+                  onClick={() => setIsNewContactPaneOpen(true)}
                   label="Add Contact"
                   icon="ri-add-line"
                   style="primary"
@@ -139,7 +138,7 @@ const Contacts = () => {
                 selectedNoteIds={selectedNoteIds}
                 setSelectedNoteIds={setSelectedNoteIds}
                 notes={notes}
-                setShowDeleteAlert={setShowDeleteAlert}
+                setIsDeleteAlertOpen={setIsDeleteAlertOpen}
               />
             </>
           ) : (
@@ -147,24 +146,24 @@ const Contacts = () => {
               image={EmptyNotesListImage}
               title="Looks like you don't have any notes!"
               subtitle="Add your notes to send customized emails to them."
-              primaryAction={() => setShowNewContactPane(true)}
+              primaryAction={() => setIsNewContactPaneOpen(true)}
               primaryActionLabel="Add New Note"
             />
           )}
         </div>
       </div>
       <NewContactPane
-        showPane={showNewContactPane}
-        setShowPane={setShowNewContactPane}
+        isNewContactPaneOpen={isNewContactPaneOpen}
+        setIsNewContactPaneOpen={setIsNewContactPaneOpen}
         setNotes={setNotes}
         notes={notes}
       />
-      {showDeleteAlert && (
+      {isDeleteAlertOpen && (
         <DeleteAlert
           selectedNoteIds={selectedNoteIds}
           notes={notes}
           setNotes={setNotes}
-          onClose={() => setShowDeleteAlert(false)}
+          onClose={() => setIsDeleteAlertOpen(false)}
         />
       )}
     </div>

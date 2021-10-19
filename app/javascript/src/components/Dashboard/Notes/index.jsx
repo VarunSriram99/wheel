@@ -15,8 +15,8 @@ import NoteTable from "./NoteTable";
 
 const Notes = () => {
   const [loading, setLoading] = useState(true);
-  const [showNewNotePane, setShowNewNotePane] = useState(false);
-  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  const [isNewNotePaneOpen, setIsNewNotePaneOpen] = useState(false);
+  const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
   const [notes, setNotes] = useState([]);
 
@@ -106,7 +106,7 @@ const Notes = () => {
               />
               <br />
               <Button
-                onClick={() => setShowNewNotePane(true)}
+                onClick={() => setIsNewNotePaneOpen(true)}
                 label="Add Note"
                 icon="ri-add-line"
                 style="primary"
@@ -123,7 +123,7 @@ const Notes = () => {
               selectedNoteIds={selectedNoteIds}
               setSelectedNoteIds={setSelectedNoteIds}
               notes={notes}
-              setShowDeleteAlert={setShowDeleteAlert}
+              setIsDeleteAlertOpen={setIsDeleteAlertOpen}
             />
           </>
         ) : (
@@ -131,20 +131,20 @@ const Notes = () => {
             image={EmptyNotesListImage}
             title="Looks like you don't have any notes!"
             subtitle="Add your notes to send customized emails to them."
-            primaryAction={() => setShowNewNotePane(true)}
+            primaryAction={() => setIsNewNotePaneOpen(true)}
             primaryActionLabel="Add New Note"
           />
         )}
       </div>
       <NewNotePane
-        showPane={showNewNotePane}
-        setShowPane={setShowNewNotePane}
+        isNewNotePaneOpen={isNewNotePaneOpen}
+        setIsNewNotePaneOpen={setIsNewNotePaneOpen}
         fetchNotes={fetchNotes}
       />
-      {showDeleteAlert && (
+      {isDeleteAlertOpen && (
         <DeleteAlert
           selectedNoteIds={selectedNoteIds}
-          onClose={() => setShowDeleteAlert(false)}
+          onClose={() => setIsDeleteAlertOpen(false)}
           refetch={fetchNotes}
         />
       )}

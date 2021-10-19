@@ -8,7 +8,7 @@ export default function NoteTable({
   selectedNoteIds,
   setSelectedNoteIds,
   notes = [],
-  setShowDeleteAlert
+  setIsDeleteAlertOpen
 }) {
   Logger.info(JSON.stringify(notes));
   selectedNoteIds;
@@ -25,7 +25,7 @@ export default function NoteTable({
                 <NoteRow
                   note={note}
                   setSelectedNoteIds={setSelectedNoteIds}
-                  setShowDeleteAlert={setShowDeleteAlert}
+                  setIsDeleteAlertOpen={setIsDeleteAlertOpen}
                 />
               </td>
             </tr>
