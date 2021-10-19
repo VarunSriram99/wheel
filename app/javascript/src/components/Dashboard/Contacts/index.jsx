@@ -8,7 +8,7 @@ import { MenuBar, Header } from "neetoui/layouts";
 
 import EmptyState from "components/Common/EmptyState";
 
-import ContactTable from "./ContactTable";
+import ContactTable from "./ContactTable/index";
 import DeleteAlert from "./DeleteAlert";
 import NewContact from "./NewContact";
 
