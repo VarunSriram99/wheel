@@ -1,32 +1,32 @@
 import React, { useState } from "react";
 
+import { Modal, Typography, Button } from "@bigbinary/neetoui/v2";
 import Logger from "js-logger";
-import { Modal, Typography, Button } from "neetoui";
 
 export default function DeleteAlert({
   onClose,
-  selectedContactIds,
-  contacts,
-  setContacts
+  selectedNoteIds,
+  notes,
+  setNotes
 }) {
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const handleDelete = async () => {
-    setIsDeleting(true);
     try {
-      let deletedcontacts = contacts;
-      deletedcontacts.splice(
-        deletedcontacts.findIndex(
-          element => element.createdAt == selectedContactIds[0]
+      setDeleting(true);
+      let deletedNotes = notes;
+      deletedNotes.splice(
+        deletedNotes.findIndex(
+          element => element.createdAt == selectedNoteIds[0]
         ),
         1
       );
-      setContacts(deletedcontacts);
-      localStorage.setItem("contacts", JSON.stringify(deletedcontacts));
+      setNotes(deletedNotes);
+      localStorage.setItem("contacts", JSON.stringify(deletedNotes));
       onClose();
     } catch (error) {
       Logger.error(error);
     } finally {
-      setIsDeleting(false);
+      setDeleting(false);
     }
   };
   return (
@@ -36,11 +36,11 @@ export default function DeleteAlert({
       submitButtonProps={{
         style: "primary",
         label: "Continue",
-        loading: isDeleting,
+        loading: deleting,
         onClick: handleDelete
       }}
-      closeButton={false}
       onClose={onClose}
+      closeButton={false}
     >
       <Modal.Header>
         <Typography style="h2">Delete Contact</Typography>
@@ -52,7 +52,7 @@ export default function DeleteAlert({
         </Typography>
       </Modal.Body>
       <Modal.Footer className="space-x-2">
-        <Button label="Continue" size="large" onClick={() => handleDelete()} />
+        <Button label="Continue" onClick={() => handleDelete()} size="large" />
         <Button
           style="text"
           label="Cancel"

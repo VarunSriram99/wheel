@@ -1,80 +1,64 @@
 import React, { useState, useEffect } from "react";
 
+import { Search, Settings, Plus } from "@bigbinary/neeto-icons";
+import { Button, PageLoader, Typography, Input } from "@bigbinary/neetoui/v2";
+import { MenuBar } from "@bigbinary/neetoui/v2/layouts";
+import { Header } from "@bigbinary/neetoui/v2/layouts";
 import EmptyNotesListImage from "images/EmptyNotesList";
-import Logger from "js-logger";
-import { Search, Settings, Plus } from "neetoicons";
-import { Button, PageLoader, Typography, Input } from "neetoui";
-import { MenuBar, Header } from "neetoui/layouts";
 
 import EmptyState from "components/Common/EmptyState";
 
 import ContactTable from "./ContactTable/index";
 import DeleteAlert from "./DeleteAlert";
-import NewContact from "./NewContact";
+import NewContactPane from "./NewContactPane";
 
 const Contacts = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isNewContactPaneOpen, setIsNewContactPaneOpen] = useState(false);
-  const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
-  const [selectedContactIds, setSelectedContactIds] = useState([]);
-  const [contacts, setContacts] = useState([]);
-  const menuBarIconProps = [
-    {
-      icon: () => <Settings size={20} />
-    },
-    {
-      icon: () => <Plus size={20} />
-    },
-    {
-      icon: () => <Search size={20} />
-    }
-  ];
-  const contactsSeedData = [
-    {
-      firstName: "Ronald",
-      lastName: "Richards",
-      email: "albert@borer.com",
-      role: "Owner",
-      createdAt: new Date()
-    },
-    {
-      firstName: "Jacob",
-      lastName: "Jones",
-      email: "albert@borer.com",
-      role: "Owner",
-      createdAt: new Date()
-    },
-    {
-      firstName: "Ronald",
-      lastName: "Richards",
-      email: "albert@borer.com",
-      role: "Owner",
-      createdAt: new Date()
-    },
-    {
-      firstName: "Jacob",
-      lastName: "Jones",
-      email: "albert@borer.com",
-      role: "Owner",
-      createdAt: new Date()
-    }
-  ];
+  const [loading, setLoading] = useState(true);
+  const [showNewContactPane, setShowNewContactPane] = useState(false);
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
+  const [selectedNoteIds, setSelectedNoteIds] = useState([]);
+  const [notes, setNotes] = useState([]);
+
   useEffect(() => {
-    try {
-      if (!localStorage.getItem("contacts")) {
-        setContacts(contactsSeedData);
-        localStorage.setItem("contacts", contacts);
-      } else {
-        setContacts(JSON.parse(localStorage.getItem("contacts")));
-      }
-    } catch (error) {
-      Logger.error(error);
-    } finally {
-      setIsLoading(false);
+    if (!localStorage.getItem("contacts")) {
+      setNotes([
+        {
+          firstName: "Ronald",
+          lastName: "Richards",
+          email: "albert@borer.com",
+          role: "Owner",
+          createdAt: new Date()
+        },
+        {
+          firstName: "Jacob",
+          lastName: "Jones",
+          email: "albert@borer.com",
+          role: "Owner",
+          createdAt: new Date()
+        },
+        {
+          firstName: "Ronald",
+          lastName: "Richards",
+          email: "albert@borer.com",
+          role: "Owner",
+          createdAt: new Date()
+        },
+        {
+          firstName: "Jacob",
+          lastName: "Jones",
+          email: "albert@borer.com",
+          role: "Owner",
+          createdAt: new Date()
+        }
+      ]);
+      localStorage.setItem("contacts", notes);
+    } else {
+      setNotes(JSON.parse(localStorage.getItem("contacts")));
     }
+    setLoading(false);
   }, []);
 
-  if (isLoading) {
+  if (loading) {
     return <PageLoader />;
   }
 
@@ -103,7 +87,19 @@ const Contacts = () => {
               Segments
             </Typography>
           </MenuBar.SubTitle>
-          <MenuBar.SubTitle iconProps={menuBarIconProps}>
+          <MenuBar.SubTitle
+            iconProps={[
+              {
+                icon: () => <Settings size={20} />
+              },
+              {
+                icon: () => <Plus size={20} />
+              },
+              {
+                icon: () => <Search size={20} />
+              }
+            ]}
+          >
             <Typography
               component="h4"
               style="h5"
@@ -127,7 +123,7 @@ const Contacts = () => {
                 />
                 <br />
                 <Button
-                  onClick={() => setIsNewContactPaneOpen(true)}
+                  onClick={() => setShowNewContactPane(true)}
                   label="Add Contact"
                   icon="ri-add-line"
                   style="primary"
@@ -138,38 +134,38 @@ const Contacts = () => {
             }
             toggleMenu={() => {}}
           />
-          {contacts.length ? (
+          {notes.length ? (
             <>
               <ContactTable
-                selectedContactIds={selectedContactIds}
-                setSelectedContactIds={setSelectedContactIds}
-                contacts={contacts}
-                setIsDeleteAlertOpen={setIsDeleteAlertOpen}
+                selectedNoteIds={selectedNoteIds}
+                setSelectedNoteIds={setSelectedNoteIds}
+                notes={notes}
+                setShowDeleteAlert={setShowDeleteAlert}
               />
             </>
           ) : (
             <EmptyState
               image={EmptyNotesListImage}
-              title="Looks like you don't have any contacts!"
-              subtitle="Add your contacts to send customized emails to them."
-              primaryAction={() => setIsNewContactPaneOpen(true)}
+              title="Looks like you don't have any notes!"
+              subtitle="Add your notes to send customized emails to them."
+              primaryAction={() => setShowNewContactPane(true)}
               primaryActionLabel="Add New Note"
             />
           )}
         </div>
       </div>
-      <NewContact
-        isNewContactPaneOpen={isNewContactPaneOpen}
-        setIsNewContactPaneOpen={setIsNewContactPaneOpen}
-        setContacts={setContacts}
-        contacts={contacts}
+      <NewContactPane
+        showPane={showNewContactPane}
+        setShowPane={setShowNewContactPane}
+        setNotes={setNotes}
+        notes={notes}
       />
-      {isDeleteAlertOpen && (
+      {showDeleteAlert && (
         <DeleteAlert
-          selectedContactIds={selectedContactIds}
-          contacts={contacts}
-          setContacts={setContacts}
-          onClose={() => setIsDeleteAlertOpen(false)}
+          selectedNoteIds={selectedNoteIds}
+          notes={notes}
+          setNotes={setNotes}
+          onClose={() => setShowDeleteAlert(false)}
         />
       )}
     </div>

@@ -1,43 +1,22 @@
 import React from "react";
 
+import { Check } from "@bigbinary/neeto-icons";
+import { Button } from "@bigbinary/neetoui/v2";
+import { Input, Select } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Form } from "formik";
-import { Check } from "neetoicons";
-import { Button } from "neetoui";
-import { Input, Select } from "neetoui/formik";
+import Logger from "js-logger";
 import * as yup from "yup";
 
-export default function Create({ onClose, setContacts, contacts }) {
-  const roleOptions = [
-    {
-      label: "Owner",
-      value: "Owner"
-    },
-    {
-      label: "Employee",
-      value: "Employee"
-    }
-  ];
-  const formikValidationSchema = {
-    firstName: yup.string().required("First Name is required"),
-    lastName: yup.string().required("Last Name is required"),
-    email: yup.string().required("Email is required"),
-    role: yup.object().required("Role is required")
-  };
-  const formikInitialValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    role: "",
-    createdAt: new Date()
-  };
+export default function NewContactForm({ onClose, setNotes, notes }) {
   const handleSubmit = values => {
     try {
       let editedValues = values;
       editedValues.role = editedValues.role.value;
-      setContacts([...contacts, editedValues]);
+      Logger.log(editedValues);
+      setNotes([...notes, editedValues]);
       localStorage.setItem(
         "contacts",
-        JSON.stringify([...contacts, editedValues])
+        JSON.stringify([...notes, editedValues])
       );
       onClose();
     } catch (err) {
@@ -46,9 +25,20 @@ export default function Create({ onClose, setContacts, contacts }) {
   };
   return (
     <Formik
-      initialValues={formikInitialValues}
+      initialValues={{
+        firstName: "",
+        lastName: "",
+        email: "",
+        role: "",
+        createdAt: new Date()
+      }}
       onSubmit={handleSubmit}
-      validationSchema={yup.object(formikValidationSchema)}
+      validationSchema={yup.object({
+        firstName: yup.string().required("First Name is required"),
+        lastName: yup.string().required("Last Name is required"),
+        email: yup.string().required("Email is required"),
+        role: yup.object().required("Role is required")
+      })}
     >
       {({ isSubmitting }) => (
         <Form>
@@ -79,9 +69,18 @@ export default function Create({ onClose, setContacts, contacts }) {
             label="Role"
             name="role"
             required
-            options={roleOptions}
+            options={[
+              {
+                label: "Owner",
+                value: "Owner"
+              },
+              {
+                label: "Employee",
+                value: "Employee"
+              }
+            ]}
             placeholder="Select Role"
-            className="my-4"
+            className="my-4 w-96"
           />
 
           <div className="nui-pane__footer nui-pane__footer--absolute my-4">
@@ -97,10 +96,10 @@ export default function Create({ onClose, setContacts, contacts }) {
             />
 
             <Button
+              onClick={onClose}
               label="Cancel"
               size="large"
               style="text"
-              onClick={onClose}
             />
           </div>
         </Form>

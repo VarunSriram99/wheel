@@ -1,62 +1,14 @@
 import React from "react";
 
+import { Check } from "@bigbinary/neeto-icons";
+import { Button, Select } from "@bigbinary/neetoui/v2";
+import { Input, Textarea } from "@bigbinary/neetoui/v2/formik";
 import { Formik, Form } from "formik";
-import { Check } from "neetoicons";
-import { Button, Select } from "neetoui";
-import { Input, Textarea } from "neetoui/formik";
 import * as yup from "yup";
 
 import notesApi from "apis/notes";
 
-export default function Create({ onClose, refetch }) {
-  const assignedContactOptions = [
-    {
-      label: "Contact 1",
-      value: "contact1"
-    },
-    {
-      label: "Contact 2",
-      value: "contact2"
-    },
-    {
-      label: "Contact 3",
-      value: "contact3"
-    }
-  ];
-  const tagsOptions = [
-    {
-      label: "Getting Started",
-      value: "gs"
-    },
-    {
-      label: "Onboarding",
-      value: "ob"
-    },
-    {
-      label: "User Flow",
-      value: "uf"
-    },
-    {
-      label: "UX",
-      value: "ux"
-    },
-    {
-      label: "Bugs",
-      value: "bg"
-    },
-    {
-      label: "V2",
-      value: "v2"
-    }
-  ];
-  const formikInitialValues = {
-    title: "",
-    description: ""
-  };
-  const formikValidationSchema = {
-    title: yup.string().required("Title is required"),
-    description: yup.string().required("Description is required")
-  };
+export default function NewNoteForm({ onClose, refetch }) {
   const handleSubmit = async values => {
     try {
       await notesApi.create(values);
@@ -68,9 +20,15 @@ export default function Create({ onClose, refetch }) {
   };
   return (
     <Formik
-      initialValues={formikInitialValues}
+      initialValues={{
+        title: "",
+        description: ""
+      }}
       onSubmit={handleSubmit}
-      validationSchema={yup.object(formikValidationSchema)}
+      validationSchema={yup.object({
+        title: yup.string().required("Title is required"),
+        description: yup.string().required("Description is required")
+      })}
     >
       {({ isSubmitting }) => (
         <Form>
@@ -92,14 +50,52 @@ export default function Create({ onClose, refetch }) {
           <Select
             label="Assigned Contact"
             required
-            options={assignedContactOptions}
+            options={[
+              {
+                label: "Contact 1",
+                value: "contact1"
+              },
+              {
+                label: "Contact 2",
+                value: "contact2"
+              },
+              {
+                label: "Contact 3",
+                value: "contact3"
+              }
+            ]}
             placeholder="Select Role"
             className="my-4"
           />
           <Select
             label="Tags"
             required
-            options={tagsOptions}
+            options={[
+              {
+                label: "Getting Started",
+                value: "gs"
+              },
+              {
+                label: "Onboarding",
+                value: "ob"
+              },
+              {
+                label: "User Flow",
+                value: "uf"
+              },
+              {
+                label: "UX",
+                value: "ux"
+              },
+              {
+                label: "Bugs",
+                value: "bg"
+              },
+              {
+                label: "V2",
+                value: "v2"
+              }
+            ]}
             placeholder="Select Role"
             className="my-4"
           />
@@ -116,10 +112,10 @@ export default function Create({ onClose, refetch }) {
             />
 
             <Button
+              onClick={onClose}
               label="Cancel"
               size="large"
               style="text"
-              onClick={onClose}
             />
           </div>
         </Form>

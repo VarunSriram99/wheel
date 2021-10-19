@@ -1,12 +1,12 @@
 import React from "react";
 
-import { MenuHorizontal } from "neetoicons";
-import { Avatar, Dropdown, Checkbox } from "neetoui";
+import { MenuHorizontal } from "@bigbinary/neeto-icons";
+import { Avatar, Dropdown, Checkbox } from "@bigbinary/neetoui/v2";
 
-function ContactRow({ contact, setSelectedContactIds, setIsDeleteAlertOpen }) {
+function ContactRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
   function deleteHandle(e) {
-    setSelectedContactIds([e.target.id]);
-    setIsDeleteAlertOpen(true);
+    setSelectedNoteIds([e.target.id]);
+    setShowDeleteAlert(true);
   }
   return (
     <>
@@ -15,16 +15,16 @@ function ContactRow({ contact, setSelectedContactIds, setIsDeleteAlertOpen }) {
           <Checkbox />
         </td>
         <td className="flex flex-row items-center">
-          <Avatar user={{ name: contact.firstName + " " + contact.lastName }} />
+          <Avatar user={{ name: note.firstName + " " + note.lastName }} />
           &nbsp;&nbsp;
           <div className="flex-col flex">
-            <p>{contact.firstName + " " + contact.lastName}</p>
-            <p>{contact.role}</p>
+            <p>{note.firstName + " " + note.lastName}</p>
+            <p>{note.role}</p>
           </div>
         </td>
-        <td>{contact.email}</td>
+        <td>{note.email}</td>
         <td>
-          {new Date(contact.createdAt)
+          {new Date(note.createdAt)
             .toDateString()
             .split(" ")
             .slice(1)
@@ -38,7 +38,7 @@ function ContactRow({ contact, setSelectedContactIds, setIsDeleteAlertOpen }) {
             closeOnSelect
           >
             <li
-              id={contact.createdAt}
+              id={note.createdAt}
               onClick={e => {
                 deleteHandle(e);
               }}

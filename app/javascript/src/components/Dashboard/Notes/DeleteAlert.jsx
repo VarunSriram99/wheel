@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 
-import { Modal, Typography, Button } from "neetoui";
+import { Modal, Typography, Button } from "@bigbinary/neetoui/v2";
 
 import notesApi from "apis/notes";
 
 export default function DeleteAlert({ refetch, onClose, selectedNoteIds }) {
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const handleDelete = async () => {
-    setIsDeleting(true);
     try {
+      setDeleting(true);
       await notesApi.destroy({ ids: selectedNoteIds });
       onClose();
       refetch();
     } catch (error) {
       logger.error(error);
     } finally {
-      setIsDeleting(false);
+      setDeleting(false);
     }
   };
   return (
@@ -25,7 +25,7 @@ export default function DeleteAlert({ refetch, onClose, selectedNoteIds }) {
       submitButtonProps={{
         style: "primary",
         label: "Continue",
-        loading: isDeleting,
+        loading: deleting,
         onClick: handleDelete
       }}
       onClose={onClose}
@@ -45,10 +45,10 @@ export default function DeleteAlert({ refetch, onClose, selectedNoteIds }) {
         <Button
           style="text"
           label="Cancel"
-          size="large"
           onClick={() => {
             onClose();
           }}
+          size="large"
         />
       </Modal.Footer>
     </Modal>
