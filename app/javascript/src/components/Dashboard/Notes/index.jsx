@@ -24,11 +24,6 @@ const Notes = () => {
     "Search Name, Email, Phone Number, Ect."
   );
 
-  const [searchString, setSearchString] = useState(
-    "Search Name, Email, Phone Number, Ect."
-  );
-
-
   useEffect(() => {
     fetchNotes();
   }, []);
