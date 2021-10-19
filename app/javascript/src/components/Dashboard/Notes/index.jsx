@@ -40,9 +40,12 @@ const Notes = () => {
   }
 
   return (
-    <>
+    <div className="flex flex-col w-full">
       <Header
-        title="Notes"
+        title="All Notes"
+        menuBarToggle={() => {
+          alert("Clicked");
+        }}
         actionBlock={
           <div className="flex flex-row justify-center">
             <SubHeader
@@ -61,42 +64,21 @@ const Notes = () => {
               icon="ri-add-line"
               style="primary"
               size="large"
-              //className="w-48"
             />
           </div>
         }
         toggleMenu={() => {}}
       />
-
       {notes.length ? (
         <>
-          {/* <SubHeader
-            searchProps={{
-              value: searchTerm,
-              onChange: e => setSearchTerm(e.target.value),
-              clear: () => setSearchTerm("")
-            }}
-            deleteButtonProps={{
-              onClick: () => setShowDeleteAlert(true),
-              disabled: !selectedNoteIds.length
-            }}
-          /> */}
           <NoteTable
             selectedNoteIds={selectedNoteIds}
             setSelectedNoteIds={setSelectedNoteIds}
             notes={notes}
             setShowDeleteAlert={setShowDeleteAlert}
           />
-        </>
-      ) : (
-        <EmptyState
-          image={EmptyNotesListImage}
-          title="Looks like you don't have any notes!"
-          subtitle="Add your notes to send customized emails to them."
-          primaryAction={() => setShowNewNotePane(true)}
-          primaryActionLabel="Add New Note"
-        />
-      )}
+        )}
+      </div>
       <NewNotePane
         showPane={showNewNotePane}
         setShowPane={setShowNewNotePane}
@@ -109,7 +91,7 @@ const Notes = () => {
           refetch={fetchNotes}
         />
       )}
-    </>
+    </div>
   );
 };
 

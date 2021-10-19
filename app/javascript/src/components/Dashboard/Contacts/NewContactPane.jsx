@@ -2,9 +2,14 @@ import React from "react";
 
 import { Pane, Typography } from "@bigbinary/neetoui/v2";
 
-import NewNoteForm from "./NewNoteForm";
+import NewContactForm from "./NewContactForm";
 
-export default function NewNotePane({ fetchNotes, showPane, setShowPane }) {
+export default function NewContactPane({
+  showPane,
+  setShowPane,
+  setNotes,
+  notes
+}) {
   const onClose = () => setShowPane(false);
   return (
     <Pane isOpen={showPane} onClose={onClose}>
@@ -15,7 +20,7 @@ export default function NewNotePane({ fetchNotes, showPane, setShowPane }) {
       </Pane.Header>
       <Pane.Body>
         <div className="px-6">
-          <NewNoteForm onClose={onClose} refetch={fetchNotes} />
+          <NewContactForm onClose={onClose} setNotes={setNotes} notes={notes} />
         </div>
       </Pane.Body>
     </Pane>

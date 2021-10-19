@@ -61,6 +61,7 @@ function NoteRow({ note, setSelectedNoteIds, setShowDeleteAlert }) {
             size="small"
             user={{
               name: "neeto UI"
+
             }}
           />
         </div>

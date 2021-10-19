@@ -1,7 +1,8 @@
 import React from "react";
 
+import { Check } from "@bigbinary/neeto-icons";
+import { Button, Select } from "@bigbinary/neetoui/v2";
 import { Formik, Form } from "formik";
-import { Button } from "neetoui";
 import { Input, Textarea } from "neetoui/formik";
 import * as yup from "yup";
 
@@ -31,24 +32,77 @@ export default function NewNoteForm({ onClose, refetch }) {
     >
       {({ isSubmitting }) => (
         <Form>
-          <Input label="Title" name="title" className="mb-6" />
-          <Textarea label="Description" name="description" rows={8} />
-          <div className="nui-pane__footer nui-pane__footer--absolute">
+          <Input label="Title" name="title" className="mb-6 w-96" required />
+          <Textarea label="Description" name="description" rows={1} required />
+          <Select
+            label="Assigned Contact"
+            required
+            options={[
+              {
+                label: "Contact 1",
+                value: "contact1"
+              },
+              {
+                label: "Contact 2",
+                value: "contact2"
+              },
+              {
+                label: "Contact 3",
+                value: "contact3"
+              }
+            ]}
+            placeholder="Select Role"
+            className="my-4"
+          />
+          <Select
+            label="Tags"
+            required
+            options={[
+              {
+                label: "Getting Started",
+                value: "gs"
+              },
+              {
+                label: "Onboarding",
+                value: "ob"
+              },
+              {
+                label: "User Flow",
+                value: "uf"
+              },
+              {
+                label: "UX",
+                value: "ux"
+              },
+              {
+                label: "Bugs",
+                value: "bg"
+              },
+              {
+                label: "V2",
+                value: "v2"
+              }
+            ]}
+            placeholder="Select Role"
+            className="my-4"
+          />
+          <div className="nui-pane__footer nui-pane__footer--absolute my-4">
+            <Button
+              type="submit"
+              label="Save Changes"
+              size="large"
+              style="primary"
+              className="ml-2"
+              icon={Check}
+              disabled={isSubmitting}
+              loading={isSubmitting}
+            />
+
             <Button
               onClick={onClose}
               label="Cancel"
               size="large"
-              style="secondary"
-            />
-
-            <Button
-              type="submit"
-              label="Submit"
-              size="large"
-              style="primary"
-              className="ml-2"
-              disabled={isSubmitting}
-              loading={isSubmitting}
+              style="text"
             />
           </div>
         </Form>
