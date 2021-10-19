@@ -32,13 +32,7 @@ export default function NewNoteForm({ onClose, refetch }) {
     >
       {({ isSubmitting }) => (
         <Form>
-          <Input
-            label="Title"
-            name="title"
-            size="large"
-            className="mb-6 w-full"
-            required
-          />
+          <Input label="Title" name="title" className="mb-6 w-96" required />
           <Textarea label="Description" name="description" rows={1} required />
           <Select
             label="Assigned Contact"
