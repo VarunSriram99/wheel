@@ -3,14 +3,12 @@ import React from "react";
 import { Clock } from "@bigbinary/neeto-icons";
 import { Sidebar } from "@bigbinary/neetoui/v2/layouts";
 import { Toastr } from "neetoui";
-import { withRouter } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 
 import authenticationApi from "apis/authentication";
 import { resetAuthTokens } from "apis/axios";
 import { useAuthDispatch } from "contexts/auth";
 import { useUserState } from "contexts/user";
-
 
 const NavBar = () => {
   let history = useHistory();
@@ -52,29 +50,13 @@ const NavBar = () => {
               label: "Settings",
               to: "/misc"
             }
-          ]}
-          organizationInfo={{
-            name: "neetoUI",
-            subdomain: "neetoui.netlify.app"
-          }}
-          profileInfo={{
-            dropdownProps: [
-              {
-                label: "Edit"
-              },
-              {
-                label: "Logout",
-                onClick: handleLogout
-              }
-            ],
-            email: user.email,
-            name: user.first_name + " " + user.last_name
-          }}
-        />
-      </div>
-    </BrowserRouter>
+          ],
+          email: user.email,
+          name: user.first_name + " " + user.last_name
+        }}
+      />
+    </div>
   );
-
 };
 
 export default withRouter(NavBar);
