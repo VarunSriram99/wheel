@@ -29,6 +29,7 @@ export default function DeleteAlert({ refetch, onClose, selectedNoteIds }) {
         onClick: handleDelete
       }}
       onClose={onClose}
+      closeButton={false}
     >
       <Modal.Header>
         <Typography style="h2">Delete Note</Typography>
