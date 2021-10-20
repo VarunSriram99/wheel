@@ -8,52 +8,14 @@ import * as yup from "yup";
 
 import notesApi from "apis/notes";
 
+import { ASSIGNED_CONTACT_OPTIONS, TAG_OPTIONS } from "../constants";
+
 export default function Create({ onClose, refetch }) {
-  const assignedContactOptions = [
-    {
-      label: "Contact 1",
-      value: "contact1"
-    },
-    {
-      label: "Contact 2",
-      value: "contact2"
-    },
-    {
-      label: "Contact 3",
-      value: "contact3"
-    }
-  ];
-  const tagsOptions = [
-    {
-      label: "Getting Started",
-      value: "gs"
-    },
-    {
-      label: "Onboarding",
-      value: "ob"
-    },
-    {
-      label: "User Flow",
-      value: "uf"
-    },
-    {
-      label: "UX",
-      value: "ux"
-    },
-    {
-      label: "Bugs",
-      value: "bg"
-    },
-    {
-      label: "V2",
-      value: "v2"
-    }
-  ];
-  const formikInitialValues = {
+  const FORMIK_INITIAL_VALUES = {
     title: "",
     description: ""
   };
-  const formikValidationSchema = {
+  const FORMIK_VALIDATION_SCHEMA = {
     title: yup.string().required("Title is required"),
     description: yup.string().required("Description is required")
   };
@@ -68,9 +30,9 @@ export default function Create({ onClose, refetch }) {
   };
   return (
     <Formik
-      initialValues={formikInitialValues}
+      initialValues={FORMIK_INITIAL_VALUES}
       onSubmit={handleSubmit}
-      validationSchema={yup.object(formikValidationSchema)}
+      validationSchema={yup.object(FORMIK_VALIDATION_SCHEMA)}
     >
       {({ isSubmitting }) => (
         <Form>
@@ -92,14 +54,14 @@ export default function Create({ onClose, refetch }) {
           <Select
             label="Assigned Contact"
             required
-            options={assignedContactOptions}
+            options={ASSIGNED_CONTACT_OPTIONS}
             placeholder="Select Role"
             className="my-4"
           />
           <Select
             label="Tags"
             required
-            options={tagsOptions}
+            options={TAG_OPTIONS}
             placeholder="Select Role"
             className="my-4"
           />
