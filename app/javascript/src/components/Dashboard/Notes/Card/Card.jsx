@@ -14,9 +14,9 @@ function Card({ note, setSelectedNoteIds, setIsDeleteAlertOpen }) {
   }
   return (
     <div className="py-4">
-      <CardHeader note={note} deleteHandle={deleteHandle} />
-      <CardBody note={note} />
-      <CardFooter note={note} />
+      <CardHeader title={note.title} id={note.id} deleteHandle={deleteHandle} />
+      <CardBody description={note.description} />
+      <CardFooter created_at={note.created_at} updated_at={note.updated_at} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import EmptyNotesListImage from "images/EmptyNotesList";
 import Logger from "js-logger";
-import { Search, Settings, Plus } from "neetoicons";
+import { Search } from "neetoicons";
 import { Button, PageLoader, Typography, Input } from "neetoui";
 import { MenuBar, Header } from "neetoui/layouts";
 
@@ -10,6 +10,7 @@ import notesApi from "apis/notes";
 import EmptyState from "components/Common/EmptyState";
 
 import Cards from "./Card";
+import { MENUBAR_ICON_PROPS } from "./constants";
 import DeleteAlert from "./DeleteAlert";
 import NewNote from "./NewNote";
 
@@ -23,18 +24,6 @@ const Notes = () => {
   useEffect(() => {
     fetchNotes();
   }, []);
-
-  const menuBarIconProps = [
-    {
-      icon: () => <Settings size={20} />
-    },
-    {
-      icon: () => <Plus size={20} />
-    },
-    {
-      icon: () => <Search size={20} />
-    }
-  ];
 
   const fetchNotes = async () => {
     setIsLoading(true);
@@ -79,7 +68,7 @@ const Notes = () => {
         <MenuBar.Block label="Europe" count={80} />
         <MenuBar.Block label="Middle-East" count={60} />
         <MenuBar.Block label="Asia" count={60} />
-        <MenuBar.SubTitle iconProps={menuBarIconProps}>
+        <MenuBar.SubTitle iconProps={MENUBAR_ICON_PROPS}>
           <Typography
             component="h4"
             style="h5"

@@ -6,30 +6,13 @@ import { Button } from "neetoui";
 import { Input, Select } from "neetoui/formik";
 import * as yup from "yup";
 
+import {
+  ROLE_FIELD_OPTIONS,
+  FORMIK_INITIAL_VALUES,
+  FORMIK_VALIDATION_SCHEMA
+} from "../constants";
+
 export default function Create({ onClose, setContacts, contacts }) {
-  const roleOptions = [
-    {
-      label: "Owner",
-      value: "Owner"
-    },
-    {
-      label: "Employee",
-      value: "Employee"
-    }
-  ];
-  const formikValidationSchema = {
-    firstName: yup.string().required("First Name is required"),
-    lastName: yup.string().required("Last Name is required"),
-    email: yup.string().required("Email is required"),
-    role: yup.object().required("Role is required")
-  };
-  const formikInitialValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    role: "",
-    createdAt: new Date()
-  };
   const handleSubmit = values => {
     try {
       let editedValues = values;
@@ -46,9 +29,9 @@ export default function Create({ onClose, setContacts, contacts }) {
   };
   return (
     <Formik
-      initialValues={formikInitialValues}
+      initialValues={FORMIK_INITIAL_VALUES}
       onSubmit={handleSubmit}
-      validationSchema={yup.object(formikValidationSchema)}
+      validationSchema={yup.object(FORMIK_VALIDATION_SCHEMA)}
     >
       {({ isSubmitting }) => (
         <Form>
@@ -79,7 +62,7 @@ export default function Create({ onClose, setContacts, contacts }) {
             label="Role"
             name="role"
             required
-            options={roleOptions}
+            options={ROLE_FIELD_OPTIONS}
             placeholder="Select Role"
             className="my-4"
           />

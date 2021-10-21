@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 
 import EmptyNotesListImage from "images/EmptyNotesList";
 import Logger from "js-logger";
-import { Search, Settings, Plus } from "neetoicons";
+import { Search } from "neetoicons";
 import { Button, PageLoader, Typography, Input } from "neetoui";
 import { MenuBar, Header } from "neetoui/layouts";
 
 import EmptyState from "components/Common/EmptyState";
 
-import ContactTable from "./ContactTable/index";
+import { MENUBAR_ICON_PROPS, CONTACTS_SEED_DATA } from "./constants";
+import ContactTable from "./ContactTable";
 import DeleteAlert from "./DeleteAlert";
 import NewContact from "./NewContact";
 
@@ -18,51 +19,11 @@ const Contacts = () => {
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   const [selectedContactIds, setSelectedContactIds] = useState([]);
   const [contacts, setContacts] = useState([]);
-  const menuBarIconProps = [
-    {
-      icon: () => <Settings size={20} />
-    },
-    {
-      icon: () => <Plus size={20} />
-    },
-    {
-      icon: () => <Search size={20} />
-    }
-  ];
-  const contactsSeedData = [
-    {
-      firstName: "Ronald",
-      lastName: "Richards",
-      email: "albert@borer.com",
-      role: "Owner",
-      createdAt: new Date()
-    },
-    {
-      firstName: "Jacob",
-      lastName: "Jones",
-      email: "albert@borer.com",
-      role: "Owner",
-      createdAt: new Date()
-    },
-    {
-      firstName: "Ronald",
-      lastName: "Richards",
-      email: "albert@borer.com",
-      role: "Owner",
-      createdAt: new Date()
-    },
-    {
-      firstName: "Jacob",
-      lastName: "Jones",
-      email: "albert@borer.com",
-      role: "Owner",
-      createdAt: new Date()
-    }
-  ];
+
   useEffect(() => {
     try {
       if (!localStorage.getItem("contacts")) {
-        setContacts(contactsSeedData);
+        setContacts(CONTACTS_SEED_DATA);
         localStorage.setItem("contacts", contacts);
       } else {
         setContacts(JSON.parse(localStorage.getItem("contacts")));
@@ -103,7 +64,7 @@ const Contacts = () => {
               Segments
             </Typography>
           </MenuBar.SubTitle>
-          <MenuBar.SubTitle iconProps={menuBarIconProps}>
+          <MenuBar.SubTitle iconProps={MENUBAR_ICON_PROPS}>
             <Typography
               component="h4"
               style="h5"

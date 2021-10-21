@@ -1,21 +1,27 @@
 import React from "react";
 
+import dayjs from "dayjs";
 import { Clock } from "neetoicons";
 import { Tag, Tooltip, Avatar, Typography } from "neetoui";
 
 import { useUserState } from "contexts/user";
 
-export default function CardFooter({ note }) {
-  const { user } = useUserState();
-  const day = {
-    1: "Monday",
-    2: "Tuesday",
-    3: "Wednesday",
-    4: "Thursday",
-    5: "Friday",
-    6: "Saturday",
-    0: "Sunday"
+export default function CardFooter({ created_at, updated_at }) {
+  const dateDifference = () => {
+    const currentDate = dayjs();
+    return created_at === updated_at
+      ? `Created ${dayjs
+          .duration(currentDate.diff(dayjs(created_at)))
+          .asHours()
+          .toFixed(0)} hours ago`
+      : `Drafted ${dayjs
+          .duration(currentDate.diff(dayjs(updated_at)))
+          .asHours()
+          .toFixed(0)} hours ago`;
   };
+  const { user } = useUserState();
+  var duration = require("dayjs/plugin/duration");
+  dayjs.extend(duration);
   return (
     <div className="flex flex-row justify-between px-2 mt-2 pt-2 mx-2">
       <Tag
@@ -26,42 +32,21 @@ export default function CardFooter({ note }) {
       />
       <div className="flex flex-row items-center">
         <Tooltip
-          content={
-            day[new Date(note.updated_at).getDay()] +
-            ", " +
-            (new Date(note.updated_at).getHours() > 12
-              ? parseInt(new Date(note.updated_at).getHours()) - 12
-              : new Date(note.updated_at).getHours()
-            )
-              .toString()
-              .padStart(2, "0") +
-            ":" +
-            new Date(note.updated_at).getMinutes().toString().padStart(2, "0") +
-            " " +
-            (new Date(note.updated_at).getHours() > 12 ? "PM" : "AM")
-          }
+          content={dayjs(updated_at).format("dddd, hh:mm A")}
           followCursor="horizontal"
           placement="bottom"
         >
           <div className="flex flex-row items-center">
             <Clock color="grey" size={15} />
             &nbsp;
-            <Typography style="body3">
-              {note.created_at === note.updated_at
-                ? "Created " +
-                  parseInt((new Date() - new Date(note.created_at)) / 3600000) +
-                  " hours ago "
-                : "Drafted " +
-                  parseInt((new Date() - new Date(note.updated_at)) / 3600000) +
-                  " hours ago "}
-            </Typography>
+            <Typography style="body3">{dateDifference()}</Typography>
             &nbsp;
           </div>
         </Tooltip>
         <Avatar
           size="small"
           user={{
-            name: user?.first_name + " " + user?.last_name
+            name: `${user?.first_name} ${user?.last_name}`
           }}
         />
       </div>

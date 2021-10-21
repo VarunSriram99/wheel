@@ -15,10 +15,10 @@ function ContactRow({ contact, setSelectedContactIds, setIsDeleteAlertOpen }) {
           <Checkbox />
         </td>
         <td className="flex flex-row items-center">
-          <Avatar user={{ name: contact.firstName + " " + contact.lastName }} />
+          <Avatar user={{ name: `${contact.firstName} ${contact.lastName}` }} />
           &nbsp;&nbsp;
           <div className="flex-col flex">
-            <p>{contact.firstName + " " + contact.lastName}</p>
+            <p>{`${contact.firstName} ${contact.lastName}`}</p>
             <p>{contact.role}</p>
           </div>
         </td>
