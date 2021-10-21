@@ -1,14 +1,27 @@
 import React from "react";
 
+import dayjs from "dayjs";
 import { Clock } from "neetoicons";
 import { Tag, Tooltip, Avatar, Typography } from "neetoui";
 
 import { useUserState } from "contexts/user";
 
-import { DAY } from "../constants";
-
 export default function CardFooter({ created_at, updated_at }) {
+  const dateDifference = () => {
+    const currentDate = dayjs();
+    return created_at === updated_at
+      ? `Created ${dayjs
+          .duration(currentDate.diff(dayjs(created_at)))
+          .asHours()
+          .toFixed(0)} hours ago`
+      : `Drafted ${dayjs
+          .duration(currentDate.diff(dayjs(updated_at)))
+          .asHours()
+          .toFixed(0)} hours ago`;
+  };
   const { user } = useUserState();
+  var duration = require("dayjs/plugin/duration");
+  dayjs.extend(duration);
   return (
     <div className="flex flex-row justify-between px-2 mt-2 pt-2 mx-2">
       <Tag
@@ -19,34 +32,14 @@ export default function CardFooter({ created_at, updated_at }) {
       />
       <div className="flex flex-row items-center">
         <Tooltip
-          content={`${DAY[new Date(updated_at).getDay()]}, ${(new Date(
-            updated_at
-          ).getHours() > 12
-            ? parseInt(new Date(updated_at).getHours()) - 12
-            : new Date(updated_at).getHours()
-          )
-            .toString()
-            .padStart(2, "0")}:${new Date(updated_at)
-            .getMinutes()
-            .toString()
-            .padStart(2, "0")} ${
-            new Date(updated_at).getHours() > 12 ? "PM" : "AM"
-          }`}
+          content={dayjs(updated_at).format("dddd, hh:mm A")}
           followCursor="horizontal"
           placement="bottom"
         >
           <div className="flex flex-row items-center">
             <Clock color="grey" size={15} />
             &nbsp;
-            <Typography style="body3">
-              {created_at === updated_at
-                ? `Created ${parseInt(
-                    (new Date() - new Date(created_at)) / 3600000
-                  )} hours ago`
-                : `Drafted ${parseInt(
-                    (new Date() - new Date(updated_at)) / 3600000
-                  )} hours ago`}
-            </Typography>
+            <Typography style="body3">{dateDifference()}</Typography>
             &nbsp;
           </div>
         </Tooltip>

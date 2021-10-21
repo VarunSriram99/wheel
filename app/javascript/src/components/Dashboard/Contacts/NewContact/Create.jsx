@@ -6,22 +6,13 @@ import { Button } from "neetoui";
 import { Input, Select } from "neetoui/formik";
 import * as yup from "yup";
 
-import { ROLE_FIELD_OPTIONS } from "../constants";
+import {
+  ROLE_FIELD_OPTIONS,
+  FORMIK_INITIAL_VALUES,
+  FORMIK_VALIDATION_SCHEMA
+} from "../constants";
 
 export default function Create({ onClose, setContacts, contacts }) {
-  const FORMIK_INITIAL_VALUES = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    role: "",
-    createdAt: new Date()
-  };
-  const FORMIK_VALIDATION_SCHEMA = {
-    firstName: yup.string().required("First Name is required"),
-    lastName: yup.string().required("Last Name is required"),
-    email: yup.string().required("Email is required"),
-    role: yup.object().required("Role is required")
-  };
   const handleSubmit = values => {
     try {
       let editedValues = values;

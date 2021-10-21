@@ -8,17 +8,14 @@ import * as yup from "yup";
 
 import notesApi from "apis/notes";
 
-import { ASSIGNED_CONTACT_OPTIONS, TAG_OPTIONS } from "../constants";
+import {
+  FORMIK_INITIAL_VALUES,
+  FORMIK_VALIDATION_SCHEMA,
+  ASSIGNED_CONTACT_OPTIONS,
+  TAG_OPTIONS
+} from "../constants";
 
 export default function Create({ onClose, refetch }) {
-  const FORMIK_INITIAL_VALUES = {
-    title: "",
-    description: ""
-  };
-  const FORMIK_VALIDATION_SCHEMA = {
-    title: yup.string().required("Title is required"),
-    description: yup.string().required("Description is required")
-  };
   const handleSubmit = async values => {
     try {
       await notesApi.create(values);

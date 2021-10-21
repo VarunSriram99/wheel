@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Settings, Plus, Search } from "neetoicons";
+import * as yup from "yup";
 
 export const ASSIGNED_CONTACT_OPTIONS = [
   {
@@ -42,15 +43,6 @@ export const TAG_OPTIONS = [
     value: "v2"
   }
 ];
-export const DAY = {
-  1: "Monday",
-  2: "Tuesday",
-  3: "Wednesday",
-  4: "Thursday",
-  5: "Friday",
-  6: "Saturday",
-  0: "Sunday"
-};
 export const MENUBAR_ICON_PROPS = [
   {
     icon: () => <Settings size={20} />
@@ -62,3 +54,11 @@ export const MENUBAR_ICON_PROPS = [
     icon: () => <Search size={20} />
   }
 ];
+export const FORMIK_INITIAL_VALUES = {
+  title: "",
+  description: ""
+};
+export const FORMIK_VALIDATION_SCHEMA = {
+  title: yup.string().required("Title is required"),
+  description: yup.string().required("Description is required")
+};
