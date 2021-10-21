@@ -22,8 +22,8 @@ export default function NewNote({
           Add New Note
         </Typography>
       </Pane.Header>
-      <Pane.Body>
-        <div className="px-6 w-full">
+      <Pane.Body className="p-0 h-full">
+        <div className="w-full h-full">
           <Create onClose={onClose} refetch={fetchNotes} />
         </div>
       </Pane.Body>
