@@ -19,6 +19,7 @@ const Contacts = () => {
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   const [selectedContactIds, setSelectedContactIds] = useState([]);
   const [contacts, setContacts] = useState([]);
+  const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(true);
 
   useEffect(() => {
     try {
@@ -42,7 +43,7 @@ const Contacts = () => {
   return (
     <div className="flex flex-row w-full">
       <div className="flex flex-row w-full">
-        <MenuBar showMenu="true" title="Contacts">
+        <MenuBar showMenu={isFilterMenuOpen} title="Contacts">
           <MenuBar.Block label="All" count={0} active />
           <MenuBar.Block label="Archived" count={0} />
           <MenuBar.Block label="Completed" count={0} />
@@ -78,7 +79,9 @@ const Contacts = () => {
         <div className="flex flex-col w-full">
           <Header
             title="All Contacts"
-            menuBarToggle={() => {}}
+            menuBarToggle={() => {
+              setIsFilterMenuOpen(!isFilterMenuOpen);
+            }}
             actionBlock={
               <div className="flex flex-row items-center mr-4">
                 <Input

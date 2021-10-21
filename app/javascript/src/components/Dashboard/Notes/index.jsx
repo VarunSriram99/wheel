@@ -20,6 +20,7 @@ const Notes = () => {
   const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   const [selectedNoteIds, setSelectedNoteIds] = useState([]);
   const [notes, setNotes] = useState([]);
+  const [isFilterMenuOpen, setIsFilterMenuOpen] = useState(true);
 
   useEffect(() => {
     fetchNotes();
@@ -43,7 +44,7 @@ const Notes = () => {
 
   return (
     <div className="w-full flex">
-      <MenuBar showMenu="true" title="Notes">
+      <MenuBar showMenu={isFilterMenuOpen} title="Notes">
         <MenuBar.Block label="All" count={200} active />
         <MenuBar.Block label="Users" count={80} />
         <MenuBar.Block label="Leads" count={60} />
@@ -85,7 +86,9 @@ const Notes = () => {
       <div className="flex flex-col w-full">
         <Header
           title="All Notes"
-          menuBarToggle={() => {}}
+          menuBarToggle={() => {
+            setIsFilterMenuOpen(!isFilterMenuOpen);
+          }}
           actionBlock={
             <div className="flex flex-row items-center mr-4">
               <Input
