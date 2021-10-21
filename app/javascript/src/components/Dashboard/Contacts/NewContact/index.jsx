@@ -23,8 +23,8 @@ export default function NewContact({
           Add New Contact
         </Typography>
       </Pane.Header>
-      <Pane.Body>
-        <div className="px-6 w-full">
+      <Pane.Body className="h-full p-0">
+        <div className="w-full h-full">
           <Create
             setContacts={setContacts}
             contacts={contacts}
